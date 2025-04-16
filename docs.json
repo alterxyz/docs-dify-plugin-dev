@@ -1,102 +1,183 @@
 {
-  "$schema": "https://mintlify.com/docs.json",
-  "theme": "mint",
-  "name": "Mint Starter Kit",
-  "colors": {
-    "primary": "#16A34A",
-    "light": "#07C983",
-    "dark": "#15803D"
-  },
-  "favicon": "/favicon.svg",
-  "navigation": {
-    "tabs": [
-      {
-        "tab": "Guides",
-        "groups": [
-          {
-            "group": "Get Started",
-            "pages": [
-              "introduction",
-              "quickstart",
-              "development"
-            ]
-          },
-          {
-            "group": "Essentials",
-            "pages": [
-              "essentials/markdown",
-              "essentials/code",
-              "essentials/images",
-              "essentials/settings",
-              "essentials/navigation",
-              "essentials/reusable-snippets"
-            ]
-          }
+    "$schema": "https://mintlify.com/docs.json",
+    "theme": "mint",
+    "name": "Dify Docs",
+    "colors": {
+        "primary": "#346DDB",
+        "light": "#688FE8",
+        "dark": "#346DDB"
+    },
+    "favicon": "/logo/dify-logo.png",
+    "logo": {
+        "light": "/logo/dify-logo.svg",
+        "dark": "/logo/dify-logo.svg"
+    },
+    "navigation": {
+        "languages": [
+            {
+                "language": "zh",
+                "tabs": [
+                    {
+                        "tab": "核心内容",
+                        "groups": [
+                            {
+                                "group": "概念与入门",
+                                "pages": [
+                                    {
+                                        "group": "概览",
+                                        "pages": [
+                                            "plugin_dev_zh/0111-[getting-started-dify-plugin].zh"
+                                        ]
+                                    },
+                                    {
+                                        "group": "核心概念与速查",
+                                        "pages": [
+                                            "plugin_dev_zh/0131-[cheatsheet].zh",
+                                            "plugin_dev_zh/0131-[model-plugin-introduction].zh"
+                                        ]
+                                    }
+                                ]
+                            },
+                            {
+                                "group": "插件开发实践",
+                                "pages": [
+                                    {
+                                        "group": "快速开始",
+                                        "pages": [
+                                            "plugin_dev_zh/0211-[getting-started-dify-tool].zh",
+                                            "plugin_dev_zh/0211-[getting-started-new-model].zh"
+                                        ]
+                                    },
+                                    {
+                                        "group": "标准开发流程",
+                                        "pages": [
+                                            "plugin_dev_zh/0221-[initialize-development-tools].zh",
+                                            "plugin_dev_zh/0222-[creating-new-model-provider-extra].zh",
+                                            "plugin_dev_zh/0222-[creating-new-model-provider].zh",
+                                            "plugin_dev_zh/0222-[tool-plugin].zh"
+                                        ]
+                                    }
+                                ]
+                            },
+                            {
+                                "group": "贡献与发布",
+                                "pages": [
+                                    {
+                                        "group": "行为准则与规范",
+                                        "pages": [
+                                            "plugin_dev_zh/0312-[contributor-covenant-code-of-conduct].zh",
+                                            "plugin_dev_zh/0312-[privacy-protection-guidelines].zh"
+                                        ]
+                                    },
+                                    {
+                                        "group": "发布插件",
+                                        "pages": [
+                                            "plugin_dev_zh/0321-[release-overview].zh",
+                                            "plugin_dev_zh/0322-[release-by-file].zh",
+                                            "plugin_dev_zh/0322-[release-to-dify-marketplace].zh",
+                                            "plugin_dev_zh/0322-[release-to-individual-github-repo].zh"
+                                        ]
+                                    },
+                                    {
+                                        "group": "常见问题解答",
+                                        "pages": [
+                                            "plugin_dev_zh/0331-[faq].zh"
+                                        ]
+                                    }
+                                ]
+                            },
+                            {
+                                "group": "技术参考与示例",
+                                "pages": [
+                                    {
+                                        "group": "核心规范与功能",
+                                        "pages": [
+                                            "plugin_dev_zh/0411-[general-specifications].zh",
+                                            "plugin_dev_zh/0411-[model-designing-rules].zh",
+                                            "plugin_dev_zh/0411-[persistent-storage-kv].zh",
+                                            "plugin_dev_zh/0411-[plugin-info-by-manifest].zh",
+                                            "plugin_dev_zh/0411-[remote-debug-a-plugin].zh",
+                                            "plugin_dev_zh/0412-[model-schema].zh"
+                                        ]
+                                    },
+                                    {
+                                        "group": "开发示例",
+                                        "pages": [
+                                            "plugin_dev_zh/0432-[develop-a-slack-bot-plugin].zh",
+                                            "plugin_dev_zh/0432-[endpoint].zh"
+                                        ]
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "tab": "高级主题",
+                        "groups": [
+                            {
+                                "group": "高级实现技巧",
+                                "pages": [
+                                    {
+                                        "group": "高级工具与 Agent",
+                                        "pages": [
+                                            "plugin_dev_zh/9223-[tool].zh",
+                                            "plugin_dev_zh/9231-[extension-plugin].zh",
+                                            "plugin_dev_zh/9232-[agent].zh"
+                                        ]
+                                    },
+                                    {
+                                        "group": "反向调用与其他",
+                                        "pages": [
+                                            "plugin_dev_zh/9241-[bundle].zh",
+                                            "plugin_dev_zh/9241-[reverse-invocation].zh",
+                                            "plugin_dev_zh/9242-[reverse-invocation-app].zh",
+                                            "plugin_dev_zh/9242-[reverse-invocation-model].zh",
+                                            "plugin_dev_zh/9242-[reverse-invocation-tool].zh",
+                                            "plugin_dev_zh/9243-[customizable-model].zh",
+                                            "plugin_dev_zh/9243-[reverse-invocation-node].zh"
+                                        ]
+                                    }
+                                ]
+                            },
+                            {
+                                "group": "高级 Agent 策略",
+                                "pages": [
+                                    {
+                                        "group": "Agent 策略插件",
+                                        "pages": [
+                                            "plugin_dev_zh/9433-[agent-strategy-plugin].zh"
+                                        ]
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                ]
+            }
         ]
-      },
-      {
-        "tab": "API Reference",
-        "groups": [
-          {
-            "group": "API Documentation",
-            "pages": [
-              "api-reference/introduction"
-            ]
-          },
-          {
-            "group": "Endpoint Examples",
-            "pages": [
-              "api-reference/endpoint/get",
-              "api-reference/endpoint/create",
-              "api-reference/endpoint/delete",
-              "api-reference/endpoint/webhook"
-            ]
-          }
-        ]
-      }
-    ],
-    "global": {
-      "anchors": [
-        {
-          "anchor": "Documentation",
-          "href": "https://mintlify.com/docs",
-          "icon": "book-open-cover"
-        },
-        {
-          "anchor": "Community",
-          "href": "https://mintlify.com/community",
-          "icon": "slack"
-        },
-        {
-          "anchor": "Blog",
-          "href": "https://mintlify.com/blog",
-          "icon": "newspaper"
+    },
+    "navbar": {
+        "links": [
+            {
+                "label": "GitHub",
+                "href": "https://github.com/langgenius/dify"
+            },
+            {
+                "label": "支持",
+                "href": "mailto:support@dify.ai"
+            }
+        ],
+        "primary": {
+            "type": "button",
+            "label": "Dify.AI",
+            "href": "https://cloud.dify.ai"
         }
-      ]
+    },
+    "footer": {
+        "socials": {
+            "x": "https://x.com/dify_ai",
+            "github": "https://github.com/langgenius/dify",
+            "linkedin": "https://www.linkedin.com/company/langgenius"
+        }
     }
-  },
-  "logo": {
-    "light": "/logo/light.svg",
-    "dark": "/logo/dark.svg"
-  },
-  "navbar": {
-    "links": [
-      {
-        "label": "Support",
-        "href": "mailto:hi@mintlify.com"
-      }
-    ],
-    "primary": {
-      "type": "button",
-      "label": "Dashboard",
-      "href": "https://dashboard.mintlify.com"
-    }
-  },
-  "footer": {
-    "socials": {
-      "x": "https://x.com/mintlify",
-      "github": "https://github.com/mintlify",
-      "linkedin": "https://linkedin.com/company/mintlify"
-    }
-  }
 }
