@@ -163,8 +163,12 @@
                 "href": "https://github.com/langgenius/dify"
             },
             {
-                "label": "支持",
-                "href": "mailto:support@dify.ai"
+                "label": "插件",
+                "href": "https://github.com/langgenius/dify-plugins"
+            },
+            {
+                "label": "插件市场",
+                "href": "https://marketplace.dify.ai/"
             }
         ],
         "primary": {
