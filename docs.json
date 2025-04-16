@@ -18,7 +18,7 @@
                 "language": "zh",
                 "tabs": [
                     {
-                        "tab": "核心内容",
+                        "tab": "插件开发",
                         "groups": [
                             {
                                 "group": "概念与入门",
@@ -28,18 +28,11 @@
                                         "pages": [
                                             "plugin_dev_zh/0111-[getting-started-dify-plugin].zh"
                                         ]
-                                    },
-                                    {
-                                        "group": "核心概念与速查",
-                                        "pages": [
-                                            "plugin_dev_zh/0131-[cheatsheet].zh",
-                                            "plugin_dev_zh/0131-[model-plugin-introduction].zh"
-                                        ]
                                     }
                                 ]
                             },
                             {
-                                "group": "插件开发实践",
+                                "group": "开发实践",
                                 "pages": [
                                     {
                                         "group": "快速开始",
@@ -87,19 +80,8 @@
                                 ]
                             },
                             {
-                                "group": "技术参考与示例",
+                                "group": "实践案例与示例",
                                 "pages": [
-                                    {
-                                        "group": "核心规范与功能",
-                                        "pages": [
-                                            "plugin_dev_zh/0411-[general-specifications].zh",
-                                            "plugin_dev_zh/0411-[model-designing-rules].zh",
-                                            "plugin_dev_zh/0411-[persistent-storage-kv].zh",
-                                            "plugin_dev_zh/0411-[plugin-info-by-manifest].zh",
-                                            "plugin_dev_zh/0411-[remote-debug-a-plugin].zh",
-                                            "plugin_dev_zh/0412-[model-schema].zh"
-                                        ]
-                                    },
                                     {
                                         "group": "开发示例",
                                         "pages": [
@@ -108,25 +90,21 @@
                                         ]
                                     }
                                 ]
-                            }
-                        ]
-                    },
-                    {
-                        "tab": "高级主题",
-                        "groups": [
+                            },
                             {
-                                "group": "高级实现技巧",
+                                "group": "高级开发技巧",
                                 "pages": [
                                     {
-                                        "group": "高级工具与 Agent",
+                                        "group": "高级插件与 Agent",
                                         "pages": [
                                             "plugin_dev_zh/9223-[tool].zh",
                                             "plugin_dev_zh/9231-[extension-plugin].zh",
-                                            "plugin_dev_zh/9232-[agent].zh"
+                                            "plugin_dev_zh/9232-[agent].zh",
+                                            "plugin_dev_zh/9433-[agent-strategy-plugin].zh"
                                         ]
                                     },
                                     {
-                                        "group": "反向调用与其他",
+                                        "group": "反向调用实现",
                                         "pages": [
                                             "plugin_dev_zh/9241-[bundle].zh",
                                             "plugin_dev_zh/9241-[reverse-invocation].zh",
@@ -138,16 +116,28 @@
                                         ]
                                     }
                                 ]
+                            }
+                        ]
+                    },
+                    {
+                        "tab": "速查与规范",
+                        "groups": [
+                            {
+                                "group": "核心概念与速查",
+                                "pages": [
+                                    "plugin_dev_zh/0131-[cheatsheet].zh",
+                                    "plugin_dev_zh/0131-[model-plugin-introduction].zh"
+                                ]
                             },
                             {
-                                "group": "高级 Agent 策略",
+                                "group": "核心规范与功能",
                                 "pages": [
-                                    {
-                                        "group": "Agent 策略插件",
-                                        "pages": [
-                                            "plugin_dev_zh/9433-[agent-strategy-plugin].zh"
-                                        ]
-                                    }
+                                    "plugin_dev_zh/0411-[general-specifications].zh",
+                                    "plugin_dev_zh/0411-[model-designing-rules].zh",
+                                    "plugin_dev_zh/0411-[persistent-storage-kv].zh",
+                                    "plugin_dev_zh/0411-[plugin-info-by-manifest].zh",
+                                    "plugin_dev_zh/0411-[remote-debug-a-plugin].zh",
+                                    "plugin_dev_zh/0412-[model-schema].zh"
                                 ]
                             }
                         ]
