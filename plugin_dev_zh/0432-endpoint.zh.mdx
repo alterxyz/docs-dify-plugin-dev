@@ -11,7 +11,7 @@ title: Endpoint
 summary: 本文档详细介绍了Dify插件中Endpoint的结构和实现方式，以彩虹猫项目为例。内容包括如何定义Endpoint组、配置接口、实现_invoke方法以及处理请求和响应。文档详细解释了各种YAML配置字段的含义和使用方法。
 ---
 
-本文将以[彩虹猫](/plugin_dev_zh/9231-extension-plugin)项目为例，说明插件内的 Endpoint 的结构。Endpoint是插件对外暴露的HTTP接口，可用于与外部系统集成。完整的插件代码请参考 [Github 仓库](https://github.com/langgenius/dify-plugin-sdks/tree/main/python/examples/neko)。
+本文将以[彩虹猫](/plugin_dev_zh/9231-extension-plugin.zh)项目为例，说明插件内的 Endpoint 的结构。Endpoint是插件对外暴露的HTTP接口，可用于与外部系统集成。完整的插件代码请参考 [Github 仓库](https://github.com/langgenius/dify-plugin-sdks/tree/main/python/examples/neko)。
 
 ### 组定义
 
@@ -25,7 +25,7 @@ summary: 本文档详细介绍了Dify插件中Endpoint的结构和实现方式�
 
 #### **结构**
 
-* `settings`(map\[string] [ProviderConfig](/plugin_dev_zh/0411-general-specifications#providerconfig) )：Endpoint 配置定义
+* `settings`(map\[string] [ProviderConfig](/plugin_dev_zh/0411-general-specifications#providerconfig.zh) )：Endpoint 配置定义
 * `endpoints`(list\[string], required)：指向具体的 `endpoint` 接口定义
 
 ```yaml
@@ -103,13 +103,13 @@ class Duck(Endpoint):
 * 请在开发 Endpoint 时注意安全性，避免执行危险操作
 * Endpoint 可以用于处理 Webhook 回调或提供接口给其他系统连接
 
-如果您正在学习插件开发，建议先阅读[插件开发入门指南](/plugin_dev_zh/0211-getting-started-dify-tool)和[开发者速查表](/plugin_dev_zh/0131-cheatsheet)。
+如果您正在学习插件开发，建议先阅读[插件开发入门指南](/plugin_dev_zh/0211-getting-started-dify-tool.zh)和[开发者速查表](/plugin_dev_zh/0131-cheatsheet.zh)。
 
 ## 相关资源
 
-- [插件开发基本概念](/plugin_dev_zh/0111-getting-started-dify-plugin) - 了解插件开发的整体架构
-- [彩虹猫实例](/plugin_dev_zh/9231-extension-plugin) - 扩展插件开发示例
-- [通用规范定义](/plugin_dev_zh/0411-general-specifications) - 了解 ProviderConfig 等通用结构
-- [Slack 机器人插件开发示例](/plugin_dev_zh/0432-develop-a-slack-bot-plugin) - 另一个插件开发示例
-- [插件开发入门指南](/plugin_dev_zh/0211-getting-started-dify-tool) - 从零开始开发插件
-- [反向调用 Dify 服务](/plugin_dev_zh/9241-reverse-invocation) - 了解如何使用反向调用功能
+- [插件开发基本概念](/plugin_dev_zh/0111-getting-started-dify-plugin.zh) - 了解插件开发的整体架构
+- [彩虹猫实例](/plugin_dev_zh/9231-extension-plugin.zh) - 扩展插件开发示例
+- [通用规范定义](/plugin_dev_zh/0411-general-specifications.zh) - 了解 ProviderConfig 等通用结构
+- [Slack 机器人插件开发示例](/plugin_dev_zh/0432-develop-a-slack-bot-plugin.zh) - 另一个插件开发示例
+- [插件开发入门指南](/plugin_dev_zh/0211-getting-started-dify-tool.zh) - 从零开始开发插件
+- [反向调用 Dify 服务](/plugin_dev_zh/9241-reverse-invocation.zh) - 了解如何使用反向调用功能
