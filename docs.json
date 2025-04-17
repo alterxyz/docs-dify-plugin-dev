@@ -280,20 +280,16 @@
         "links": [
             {
                 "label": "GitHub",
-                "href": "https://github.com/langgenius/dify"
-            },
-            {
-                "label": "插件",
                 "href": "https://github.com/langgenius/dify-plugins"
             },
             {
-                "label": "插件市场",
+                "label": "Marketplace",
                 "href": "https://marketplace.dify.ai/"
             }
         ],
         "primary": {
             "type": "button",
-            "label": "Dify.AI",
+            "label": "Dify Cloud",
             "href": "https://cloud.dify.ai"
         }
     },
