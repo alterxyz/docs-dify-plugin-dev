@@ -19,7 +19,7 @@ Agent 策略插件能够帮助 LLM 执行推理或决策逻辑，包括工具选
 * Dify 插件脚手架工具
 * Python 环境，版本号 ≥ 3.12
 
-关于如何准备插件开发的脚手架工具，详细说明请参考[初始化开发工具](initialize-development-tools.md)。
+关于如何准备插件开发的脚手架工具，详细说明请参考[初始化开发工具](/plugin_dev_zh/0221-initialize-development-tools)。
 
 **Tips**：在终端运行 `dify version` 命令，检查是否出现版本号以确认成功安装脚手架工具。
 
@@ -1083,3 +1083,12 @@ dify plugin package ./basic_agent/
 复杂任务往往需要多轮思考和多次工具调用。为了实现更智能的任务处理，通常采用循环执行的策略：**模型调用 → 工具调用**，直到任务完成或达到设定的最大迭代次数。
 
 在这个过程中，提示词（Prompt）管理变得尤为重要。为了高效地组织和动态调整模型输入，建议参考插件内 Function Calling 功能的[完整实现代码](https://github.com/langgenius/dify-official-plugins/blob/main/agent-strategies/cot_agent/strategies/function_calling.py)，了解如何通过标准化的方式来让模型调用外部工具并处理返回结果。
+
+## 相关资源
+
+- [Agent 插件开发基础](/plugin_dev_zh/9232-agent) - 了解 Agent 策略插件的基本概念
+- [插件开发基础概念](/plugin_dev_zh/0111-getting-started-dify-plugin) - 了解插件开发的整体架构
+- [初始化开发工具](/plugin_dev_zh/0221-initialize-development-tools) - 学习如何搭建开发环境
+- [反向调用 Model](/plugin_dev_zh/9242-reverse-invocation-model) - 了解如何调用平台内的模型能力
+- [反向调用 Tool](/plugin_dev_zh/9242-reverse-invocation-tool) - 了解如何调用其它插件
+- [发布插件概述](/plugin_dev_zh/0321-release-overview) - 学习插件发布流程

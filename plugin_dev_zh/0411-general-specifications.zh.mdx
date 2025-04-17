@@ -10,7 +10,7 @@ title: 通用规范定义
 summary: 本文档详细介绍了Dify插件开发中的通用结构和规范，包括路径规范、国际化对象(I18nObject)、供应商表单结构(ProviderConfig)、模型配置(ModelConfig)、节点响应(NodeResponse)和工具选择器(ToolSelector)等重要数据结构的定义和用途。
 ---
 
-本文将简要介绍插件开发中常见的结构。
+本文将简要介绍插件开发中常见的结构。在开发过程中，强烈建议配合[插件开发基本概念](/plugin_dev_zh/0111-getting-started-dify-plugin)和[开发者速查表](/plugin_dev_zh/0131-cheatsheet)一起阅读，以便更好地理解整体架构。
 
 ### 路径规范
 
@@ -37,12 +37,12 @@ summary: 本文档详细介绍了Dify插件开发中的通用结构和规范，�
 `ProviderConfig` 为一个通用的供应商表单结构，适用于 `Tool`与`Endpoint`
 
 * `name`(string)：表单项名称
-* `label`([I18nObject](general-specifications.md#i18nobject), requierd)：遵循 [IETF BCP 47](https://tools.ietf.org/html/bcp47)
-* `type`([provider\_config\_type](general-specifications.md#providerconfigtype-string), requierd)：表单类型
-* `scope`([provider\_config\_scope](general-specifications.md#providerconfigscope-string))：可选项范围，根据`type`变动
+* `label`([I18nObject](#i18nobject), requierd)：遵循 [IETF BCP 47](https://tools.ietf.org/html/bcp47)
+* `type`([provider\_config\_type](#providerconfigtype-string), requierd)：表单类型
+* `scope`([provider\_config\_scope](#providerconfigscope-string))：可选项范围，根据`type`变动
 * `required`(bool)：不能为空
 * `default`(any)：默认值，仅支持基础类型 `float` `int` `string`
-* `options`(list\[[provider\_config\_option](general-specifications.md#providerconfigoption-object)])：可选项，仅当 type 为 `select` 时使用
+* `options`(list\[[provider\_config\_option](#providerconfigoption-object)])：可选项，仅当 type 为 `select` 时使用
 * `helper`(object)：帮助文档链接的 label，遵循 [IETF BCP 47](https://tools.ietf.org/html/bcp47)
 * `url` (string)：帮助文档链接
 * `placeholder`(object)：遵循 [IETF BCP 47](https://tools.ietf.org/html/bcp47)
@@ -89,7 +89,7 @@ summary: 本文档详细介绍了Dify插件开发中的通用结构和规范，�
 
 * `provider` (string): 包含 plugin\_id 的模型供应商名称，形如 `langgenius/openai/openai`。
 * `model` (string): 具体的模型名称。
-* `model_type` (enum): 模型类型的枚举，可以参考该文档。
+* `model_type` (enum): 模型类型的枚举，可以参考[模型设计规则](/plugin_dev_zh/0411-model-designing-rules#modeltype)文档。
 
 #### NodeResponse
 
@@ -110,3 +110,11 @@ summary: 本文档详细介绍了Dify插件开发中的通用结构和规范，�
   * `description` (string): 参数描述
   * `default` (any): 默认
   * `options`(list\[string]): 可选项
+
+## 相关资源
+
+- [插件开发基本概念](/plugin_dev_zh/0111-getting-started-dify-plugin) - 全面了解Dify插件开发
+- [开发者速查表](/plugin_dev_zh/0131-cheatsheet) - 插件开发常用命令和概念速查
+- [通过清单文件定义插件信息](/plugin_dev_zh/0411-plugin-info-by-manifest) - 了解插件元数据定义方式
+- [工具插件开发详情](/plugin_dev_zh/0222-tool-plugin) - 详细了解工具插件开发流程
+- [模型设计规则](/plugin_dev_zh/0411-model-designing-rules) - 了解模型配置的规范

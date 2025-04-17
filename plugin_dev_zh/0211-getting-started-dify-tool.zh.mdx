@@ -16,7 +16,7 @@ summary: 本文档提供了从零开始Dify插件开发的详细教程，以创�
 
 > **面向 LLM 的说明:** 本文档结构和内容也旨在指导 LLM 理解插件开发流程，以辅助进行代码生成、解释或调试等任务。
 
-在开始之前，您可以随时查阅我们提供的 [**开发者速查表 (Cheatsheet)**](Cheatsheet.md) 获取常用指令和信息，或在遇到更复杂问题时参考完整的开发者文档。
+在开始之前，您可以随时查阅我们提供的 [**开发者速查表 (Cheatsheet)**](/plugin_dev_zh/0131-cheatsheet) 获取常用指令和信息，或在遇到更复杂问题时参考完整的开发者文档。
 
 ## 1. 准备开发环境
 
@@ -26,6 +26,8 @@ summary: 本文档提供了从零开始Dify插件开发的详细教程，以创�
 - **Python 环境:** 需要 Python 3.12 或更高版本。
 
 ### 1.1 安装 Dify 插件开发脚手架 (CLI)
+
+> 更详细的开发环境准备指南，请参考[初始化开发工具](/plugin_dev_zh/0221-initialize-development-tools)。
 
 1. **下载:** 访问 [Dify Plugin CLI Releases](https://github.com/langgenius/dify-plugin-daemon/releases) 页面。根据您的操作系统（Windows, macOS Intel/ARM, Linux）下载对应的最新版本二进制文件。
 2. **设置执行权限 (macOS / Linux):**
@@ -196,7 +198,7 @@ print(ph_link)
 
 ### 4.3 配置 Provider 凭证
 
-我们的示例需要 `telegraph_access_token`。我们需要在 Provider 配置中定义这个凭证，以便用户在使用插件时可以输入。
+我们的示例需要 `telegraph_access_token`。我们需要在 Provider 配置中定义这个凭证，以便用户在使用插件时可以输入。关于 Provider 配置的更多信息，请参考[通过清单文件定义插件信息](/plugin_dev_zh/0411-plugin-info-by-manifest)。
 
 1. **编辑 Provider YAML:** 打开 `telegraph/provider/telegraph.yaml` 文件。
 2. **添加 `credentials_for_provider`:** 在文件末尾（或适当位置）添加以下内容：
@@ -504,7 +506,7 @@ print(ph_link)
 
 ## 7. 打包插件
 
-当插件开发完成并通过本地测试后，您可以将其打包成一个 `.difypkg` 文件，用于分发或安装。
+当插件开发完成并通过本地测试后，您可以将其打包成一个 `.difypkg` 文件，用于分发或安装。关于插件打包和发布的详细信息，请参考[发布概览](/plugin_dev_zh/0321-release-overview)。
 
 1. **返回上级目录:** 确保您的终端当前路径在 `telegraph` 文件夹的**上一级**。
 
@@ -526,6 +528,13 @@ print(ph_link)
 
 - 在 Dify 的插件管理页面手动**上传并安装**它。
 - 将其**分享**给其他人安装。
-- 按照 Dify 的规范和流程，将其**发布到官方的插件市场 (Marketplace)**，让所有 Dify 用户都能发现和使用您的插件。具体发布流程请参考官方文档：[发布插件到 Dify Marketplace](https://docs.dify.ai/zh-hans/plugins/publish-plugins/publish-to-dify-marketplace)。
+- 按照 Dify 的规范和流程，将其**发布到官方的插件市场 (Marketplace)**，让所有 Dify 用户都能发现和使用您的插件。具体发布流程请参考[发布到 Dify 市场](/plugin_dev_zh/0322-release-to-dify-marketplace)。
 
 恭喜！您已经完成了第一个 Dify 插件的开发、调试、完善和打包的全过程。现在您可以基于这个基础，探索更复杂、更强大的插件功能了。
+
+## 下一步学习
+
+- [远程调试插件](/plugin_dev_zh/0411-remote-debug-a-plugin) - 了解更高级的插件调试技巧
+- [持久化存储](/plugin_dev_zh/0411-persistent-storage-kv) - 学习如何在插件中使用数据存储
+- [Slack 机器人插件开发示例](/plugin_dev_zh/0432-develop-a-slack-bot-plugin) - 查看更复杂的插件开发案例
+- [高级工具开发](/plugin_dev_zh/9223-tool) - 探索工具插件的高级功能

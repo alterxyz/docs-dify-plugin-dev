@@ -14,15 +14,22 @@ summary: 本文档简要介绍了Dify插件的反向调用能力，即插件可�
 
 ### 可被调用的 Dify 模块
 
-*   [App](app.md)
+*   [App](/plugin_dev_zh/9242-reverse-invocation-app)
 
     插件能够访问 Dify 平台内 App 的数据。
-*   [Model](model.md)
+*   [Model](/plugin_dev_zh/9242-reverse-invocation-model)
 
     插件能够反向调用 Dify 平台内的 LLM 能力，包括平台内的所有模型类型与功能，例如 TTS、Rerank 等。
-*   [Tool](tool.md)
+*   [Tool](/plugin_dev_zh/9242-reverse-invocation-tool)
 
     插件能够调用 Dify 平台内的其它工具类型插件。
-*   [Node](node.md)
+*   [Node](/plugin_dev_zh/9243-reverse-invocation-node)
 
     插件能够调用 Dify 平台内某个 Chatflow/Workflow 应用内的节点。
+
+## 相关资源
+
+- [开发 Extension 插件](/plugin_dev_zh/9231-extension-plugin) - 学习如何开发与外部系统集成的插件
+- [开发 Slack Bot 插件](/plugin_dev_zh/0432-develop-a-slack-bot-plugin) - 使用反向调用实现与 Slack 平台集成的实例
+- [Bundle 类型插件](/plugin_dev_zh/9241-bundle) - 了解如何打包多个使用反向调用的插件
+- [使用持久化存储](/plugin_dev_zh/0411-persistent-storage-kv) - 通过 KV 存储提升插件能力

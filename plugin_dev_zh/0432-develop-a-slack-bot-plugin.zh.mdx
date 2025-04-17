@@ -13,7 +13,7 @@ summary: 本文档提供了完整的Slack Bot插件开发指南，包括遍历�
 
 **本文将帮助你：**
 
-深入掌握 Slack Bot 的搭建方法，创建由 AI 驱动的 Slack 聊天机器人，在 Slack 平台上智能回答用户的问题。
+深入掌握 Slack Bot 的搭建方法，创建由 AI 驱动的 Slack 聊天机器人，在 Slack 平台上智能回答用户的问题。如果你还没有开发插件的经验，建议先阅读[插件开发入门指南](/plugin_dev_zh/0211-getting-started-dify-tool)。
 
 ### 项目背景
 
@@ -47,7 +47,7 @@ Slack 是一个自由开放的实时办公通信平台，拥有丰富的 API。�
 
 ### 前置准备
 
-* Dify 插件脚手架工具，详细说明请参考[初始化开发工具](../initialize-development-tools.md)。
+* Dify 插件脚手架工具，详细说明请参考[初始化开发工具](/plugin_dev_zh/0221-initialize-development-tools)。
 * Python 环境，版本号 ≥ 3.12，详细说明请参考 [Python 安装教程](https://pythontest.com/python/installing-python-3-11/)，或询问 LLM 获取完整的安装教程。
 * 创建 Slack App 并获取 OAuth Token
 
@@ -69,7 +69,7 @@ Slack 是一个自由开放的实时办公通信平台，拥有丰富的 API。�
 
 ### 1. 开发插件
 
-现在开始实际的插件编码工作。在开始之前，请确保你已经阅读过[快速开始：开发 Extension 插件](../extension-plugin.md)，或已动手开发过一次 Dify 插件。
+现在开始实际的插件编码工作。在开始之前，请确保你已经阅读过[开发 Extension 插件](/plugin_dev_zh/9231-extension-plugin)，或已动手开发过一次 Dify 插件。
 
 #### 初始化项目
 
@@ -81,7 +81,7 @@ dify plugin init
 
 按照提示填写项目的基础信息，选择 `extension` 模板，并且授予 `Apps` 和 `Endpoints` 两个权限。
 
-如需了解更多关于插件反向调用 Dify 平台能力，请参考[反向调用：App](../../../schema-definition/reverse-invocation-of-the-dify-service/app.md)。
+如需了解更多关于插件反向调用 Dify 平台能力，请参考[反向调用](/plugin_dev_zh/9241-reverse-invocation)。
 
 ![Plugins permission](https://assets-docs.dify.ai/2024/12/d89a6282c5584fc43a9cadeddf09c0de.png)
 
@@ -301,7 +301,7 @@ python -m main
 
 ### 4. 打包插件（可选）
 
-确认插件能够正常运行后，可以通过以下命令行工具打包并命名插件。运行以后你可以在当前文件夹发现 `slack_bot.difypkg` 文件，该文件为最终的插件包。
+确认插件能够正常运行后，可以通过以下命令行工具打包并命名插件。运行以后你可以在当前文件夹发现 `slack_bot.difypkg` 文件，该文件为最终的插件包。关于打包的详细步骤，请参考[打包为本地文件与分享](/plugin_dev_zh/0322-release-by-file)。
 
 ```bash
 # Replace ./slack_bot with your actual plugin project path.
@@ -313,7 +313,18 @@ dify plugin package ./slack_bot
 
 ### 5. 发布插件（可选）
 
-现在可以将它上传至 [Dify Marketplace 仓库](https://github.com/langgenius/dify-plugins) 来发布你的插件了！不过在发布前，请确保你的插件遵循了[插件发布规范](https://docs.dify.ai/zh-hans/plugins/publish-plugins/publish-to-dify-marketplace)。
+现在可以将它上传至 [Dify Marketplace 仓库](https://github.com/langgenius/dify-plugins) 来发布你的插件了！不过在发布前，请确保你的插件遵循了[发布至 Dify Marketplace](/plugin_dev_zh/0322-release-to-dify-marketplace)中的规范。
+
+## 相关资源
+
+- [插件开发基本概念](/plugin_dev_zh/0111-getting-started-dify-plugin) - 全面了解Dify插件开发
+- [插件开发入门指南](/plugin_dev_zh/0211-getting-started-dify-tool) - 从零开始开发插件
+- [开发 Extension 插件](/plugin_dev_zh/9231-extension-plugin) - 了解扩展插件开发
+- [反向调用 Dify 服务](/plugin_dev_zh/9241-reverse-invocation) - 了解如何调用 Dify 平台能力
+- [反向调用 App](/plugin_dev_zh/9242-reverse-invocation-app) - 了解如何调用平台内的 App
+- [发布插件](/plugin_dev_zh/0321-release-overview) - 学习发布流程
+- [发布至 Dify Marketplace](/plugin_dev_zh/0322-release-to-dify-marketplace) - 市场发布指南
+- [端点详细定义](/plugin_dev_zh/0432-endpoint) - Endpoint 详细定义
 
 ### 参考阅读
 
@@ -323,14 +334,14 @@ dify plugin package ./slack_bot
 
 **快速开始：**
 
-* [开发 Extension 插件](../extension-plugin.md)
-* [开发 Model 插件](../model-plugin/)
-* [Bundle 类型插件：将多个插件打包](../bundle.md)
+* [开发 Extension 插件](/plugin_dev_zh/9231-extension-plugin)
+* [开发 Model 插件](/plugin_dev_zh/0211-getting-started-new-model)
+* [Bundle 类型插件：将多个插件打包](/plugin_dev_zh/9241-bundle)
 
 **插件接口文档：**
 
-* [Manifest](../../../schema-definition/manifest.md) 结构
-* [Endpoint](../../../schema-definition/endpoint.md) 详细定义
-* [反向调用 Dify 能力](../../../schema-definition/reverse-invocation-of-the-dify-service/)
-* [工具](../../../schema-definition/tool.md)
-* [模型](../../../schema-definition/model/)
+* [通过清单文件定义插件信息](/plugin_dev_zh/0411-plugin-info-by-manifest) - Manifest 结构
+* [端点](/plugin_dev_zh/0432-endpoint) - Endpoint 详细定义
+* [反向调用](/plugin_dev_zh/9241-reverse-invocation) - 反向调用 Dify 能力
+* [通用规范](/plugin_dev_zh/0411-general-specifications) - 工具规范
+* [模型架构](/plugin_dev_zh/0412-model-schema) - 模型

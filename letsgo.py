@@ -53,6 +53,7 @@ def get_page_path(filename):
     """从 mdx 文件名获取 mintlify 页面路径 (去掉 .mdx 后缀)"""
     return os.path.join(DOCS_DIR, filename[:-len('.mdx')])
 
+
 def extract_existing_pages(navigation_data, lang_code):
     """递归提取指定语言下所有已存在的页面路径"""
     existing_pages = set()
@@ -75,12 +76,13 @@ def extract_existing_pages(navigation_data, lang_code):
     for tab in target_lang_nav.get('tabs', []):
         # Handle case where tab might be None or not a dict
         if isinstance(tab, dict):
-             for group in tab.get('groups', []):
-                 # Handle case where group might be None or not a dict
-                 if isinstance(group, dict):
-                     _recursive_extract(group, existing_pages)
+            for group in tab.get('groups', []):
+                # Handle case where group might be None or not a dict
+                if isinstance(group, dict):
+                    _recursive_extract(group, existing_pages)
 
     return existing_pages, target_lang_nav
+
 
 def _recursive_extract(group_item, pages_set):
     """递归辅助函数"""
@@ -93,7 +95,8 @@ def _recursive_extract(group_item, pages_set):
             if isinstance(page, str):
                 pages_set.add(page)
             elif isinstance(page, dict) and 'group' in page:
-                _recursive_extract(page, pages_set) # Recurse into nested groups
+                # Recurse into nested groups
+                _recursive_extract(page, pages_set)
 
 
 def remove_obsolete_pages(navigation_data, pages_to_remove):
@@ -106,42 +109,45 @@ def remove_obsolete_pages(navigation_data, pages_to_remove):
                     if page not in pages_to_remove:
                         new_pages.append(page)
                 elif isinstance(page, dict):
-                    remove_obsolete_pages(page, pages_to_remove) # Recurse into nested group
+                    # Recurse into nested group
+                    remove_obsolete_pages(page, pages_to_remove)
                     # Keep nested group only if it has pages after cleaning, or maybe always keep structure?
                     # Let's keep structure for now unless explicitly empty dict {} results
-                    if page and page.get('pages'): # Keep if page dict is not empty and has pages
+                    # Keep if page dict is not empty and has pages
+                    if page and page.get('pages'):
                         new_pages.append(page)
                     elif page and 'group' in page and not page.get('pages'):
-                         print(f"信息: 嵌套组 '{page.get('group')}' 清理后为空，已保留结构。")
-                         new_pages.append(page) # Keep empty nested group structure
+                        print(f"信息: 嵌套组 '{page.get('group')}' 清理后为空，已保留结构。")
+                        # Keep empty nested group structure
+                        new_pages.append(page)
                 else:
-                     new_pages.append(page) # Keep other types
+                    new_pages.append(page)  # Keep other types
             navigation_data['pages'] = new_pages
 
         # Recurse into other dictionary values
         for key, value in navigation_data.items():
-             if key != 'pages' and isinstance(value, (dict, list)):
-                 remove_obsolete_pages(value, pages_to_remove)
+            if key != 'pages' and isinstance(value, (dict, list)):
+                remove_obsolete_pages(value, pages_to_remove)
 
     elif isinstance(navigation_data, list):
-         i = 0
-         while i < len(navigation_data):
-             item = navigation_data[i]
-             if isinstance(item, str) and item in pages_to_remove:
-                 navigation_data.pop(i)
-             elif isinstance(item, dict):
-                 remove_obsolete_pages(item, pages_to_remove)
-                 # Optional: Remove empty top-level groups?
-                 if 'group' in item and not item.get('pages'):
-                      print(f"信息: 顶层组 '{item.get('group')}' 清理后为空，已保留结构。")
-                      # navigation_data.pop(i) # Uncomment to remove empty top-level groups
-                      # continue # Skip increment if item is removed
-                 i += 1
-             elif isinstance(item, list): # Recurse into nested lists if any
-                 remove_obsolete_pages(item, pages_to_remove)
-                 i += 1
-             else:
-                 i += 1
+        i = 0
+        while i < len(navigation_data):
+            item = navigation_data[i]
+            if isinstance(item, str) and item in pages_to_remove:
+                navigation_data.pop(i)
+            elif isinstance(item, dict):
+                remove_obsolete_pages(item, pages_to_remove)
+                # Optional: Remove empty top-level groups?
+                if 'group' in item and not item.get('pages'):
+                    print(f"信息: 顶层组 '{item.get('group')}' 清理后为空，已保留结构。")
+                    # navigation_data.pop(i) # Uncomment to remove empty top-level groups
+                    # continue # Skip increment if item is removed
+                i += 1
+            elif isinstance(item, list):  # Recurse into nested lists if any
+                remove_obsolete_pages(item, pages_to_remove)
+                i += 1
+            else:
+                i += 1
 
 
 def find_or_create_target_group(target_lang_nav, tab_name, group_name, nested_group_name):
@@ -165,7 +171,7 @@ def find_or_create_target_group(target_lang_nav, tab_name, group_name, nested_gr
         target_tab['groups'] = []
 
     for group in target_tab['groups']:
-         if isinstance(group, dict) and group.get('group') == group_name:
+        if isinstance(group, dict) and group.get('group') == group_name:
             target_group = group
             break
     if target_group is None:
@@ -183,15 +189,16 @@ def find_or_create_target_group(target_lang_nav, tab_name, group_name, nested_gr
         target_nested_group = None
         # Find existing nested group
         for item in target_group['pages']:
-             if isinstance(item, dict) and item.get('group') == nested_group_name:
-                 target_nested_group = item
-                 # Ensure pages list exists in nested group
-                 target_pages_container = target_nested_group.setdefault('pages', [])
-                 # Ensure it's actually a list after setdefault
-                 if not isinstance(target_pages_container, list):
-                      target_nested_group['pages'] = []
-                      target_pages_container = target_nested_group['pages']
-                 break
+            if isinstance(item, dict) and item.get('group') == nested_group_name:
+                target_nested_group = item
+                # Ensure pages list exists in nested group
+                target_pages_container = target_nested_group.setdefault(
+                    'pages', [])
+                # Ensure it's actually a list after setdefault
+                if not isinstance(target_pages_container, list):
+                    target_nested_group['pages'] = []
+                    target_pages_container = target_nested_group['pages']
+                break
         # If not found, create it
         if target_nested_group is None:
             target_nested_group = {'group': nested_group_name, 'pages': []}
@@ -202,12 +209,15 @@ def find_or_create_target_group(target_lang_nav, tab_name, group_name, nested_gr
 
     # Final check before returning
     if not isinstance(target_pages_container, list):
-         print(f"严重错误: 无法为 Tab='{tab_name}', Group='{group_name}', Nested='{nested_group_name}' 获取有效的 pages 列表。")
-         return None # Indicate failure
+        print(
+            f"严重错误: 无法为 Tab='{tab_name}', Group='{group_name}', Nested='{nested_group_name}' 获取有效的 pages 列表。")
+        return None  # Indicate failure
 
     return target_pages_container
 
 # --- 主逻辑 (与之前版本相同) ---
+
+
 def main():
     # 1. 加载 docs.json
     try:
@@ -223,7 +233,8 @@ def main():
     navigation = docs_data.get('navigation', {})
 
     # 2. 提取现有页面 (zh)
-    existing_pages, target_lang_nav = extract_existing_pages(navigation, LANGUAGE_CODE)
+    existing_pages, target_lang_nav = extract_existing_pages(
+        navigation, LANGUAGE_CODE)
     if target_lang_nav is None:
         print(f"错误：无法在 {DOCS_JSON_PATH} 中找到语言 '{LANGUAGE_CODE}' 的导航部分。脚本终止。")
         return
@@ -234,8 +245,8 @@ def main():
     filesystem_pages = set()
     valid_files = []
     if not os.path.isdir(DOCS_DIR):
-         print(f"错误: 目录 '{DOCS_DIR}' 不存在。")
-         return
+        print(f"错误: 目录 '{DOCS_DIR}' 不存在。")
+        return
 
     for filename in os.listdir(DOCS_DIR):
         if filename.endswith(FILE_EXTENSION) and FILENAME_PATTERN.match(filename):
@@ -261,41 +272,46 @@ def main():
     # 6. 添加新页面
     if new_files_paths:
         print("正在添加新页面...")
-        new_files_sorted = sorted([f for f in valid_files if get_page_path(f) in new_files_paths])
+        new_files_sorted = sorted(
+            [f for f in valid_files if get_page_path(f) in new_files_paths])
 
         groups_to_add = defaultdict(list)
         for filename in new_files_sorted:
-             match = FILENAME_PATTERN.match(filename)
-             if match:
-                 pwxy = match.group(1)
-                 p, w, x, y = pwxy[0], pwxy[1], pwxy[2], pwxy[3]
-                 page_path = get_page_path(filename)
+            match = FILENAME_PATTERN.match(filename)
+            if match:
+                pwxy = match.group(1)
+                p, w, x, y = pwxy[0], pwxy[1], pwxy[2], pwxy[3]
+                page_path = get_page_path(filename)
 
-                 group_key = (p, w, x)
-                 if group_key in PWX_TO_GROUP_MAP:
-                     map_result = PWX_TO_GROUP_MAP[group_key]
-                     # Handle potential None for nested_group_name
-                     if len(map_result) == 3:
-                         tab_name, group_name, nested_group_name = map_result
-                     else: # Assume (tab_name, group_name) if len is 2, though map should be consistent
-                          tab_name, group_name = map_result
-                          nested_group_name = None # Explicitly None if not provided
-                     groups_to_add[(tab_name, group_name, nested_group_name)].append(page_path)
-                 else:
-                     print(f"警告: 文件 '{filename}' 的 PWX 前缀 ('{p}', '{w}', '{x}') 在 PWX_TO_GROUP_MAP 中没有找到映射，将跳过添加。")
+                group_key = (p, w, x)
+                if group_key in PWX_TO_GROUP_MAP:
+                    map_result = PWX_TO_GROUP_MAP[group_key]
+                    # Handle potential None for nested_group_name
+                    if len(map_result) == 3:
+                        tab_name, group_name, nested_group_name = map_result
+                    else:  # Assume (tab_name, group_name) if len is 2, though map should be consistent
+                        tab_name, group_name = map_result
+                        nested_group_name = None  # Explicitly None if not provided
+                    groups_to_add[(tab_name, group_name, nested_group_name)].append(
+                        page_path)
+                else:
+                    print(
+                        f"警告: 文件 '{filename}' 的 PWX 前缀 ('{p}', '{w}', '{x}') 在 PWX_TO_GROUP_MAP 中没有找到映射，将跳过添加。")
 
         for (tab_name, group_name, nested_group_name), pages_to_append in groups_to_add.items():
-            print(f"  添加到 Tab='{tab_name}', Group='{group_name}', Nested='{nested_group_name or '[无]'}' : {len(pages_to_append)} 个页面")
-            target_pages_list = find_or_create_target_group(target_lang_nav, tab_name, group_name, nested_group_name)
+            print(
+                f"  添加到 Tab='{tab_name}', Group='{group_name}', Nested='{nested_group_name or '[无]'}' : {len(pages_to_append)} 个页面")
+            target_pages_list = find_or_create_target_group(
+                target_lang_nav, tab_name, group_name, nested_group_name)
 
             if isinstance(target_pages_list, list):
-                 for new_page in pages_to_append:
-                     if new_page not in target_pages_list:
-                         target_pages_list.append(new_page)
-                         print(f"    + {new_page}")
+                for new_page in pages_to_append:
+                    if new_page not in target_pages_list:
+                        target_pages_list.append(new_page)
+                        print(f"    + {new_page}")
             else:
-                 print(f"错误: 未能为 Tab='{tab_name}', Group='{group_name}', Nested='{nested_group_name}' 添加页面。")
-
+                print(
+                    f"错误: 未能为 Tab='{tab_name}', Group='{group_name}', Nested='{nested_group_name}' 添加页面。")
 
     # 7. 写回 docs.json
     try:
@@ -304,6 +320,7 @@ def main():
         print(f"成功更新 {DOCS_JSON_PATH}")
     except IOError:
         print(f"错误: 无法写入 {DOCS_JSON_PATH}")
+
 
 if __name__ == "__main__":
     main()

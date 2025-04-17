@@ -15,6 +15,8 @@ summary: 全面的Dify插件开发参考指南，包括环境要求、安装方�
 - Python 版本 ≥ 3.12
 - Dify 插件脚手架工具 (dify-plugin-daemon)
 
+> 了解更多：[初始化开发工具](/plugin_dev_zh/0221-initialize-development-tools)
+
 ### 获取 Dify Plugin 开发包
 
 [Dify Plugin CLI](https://github.com/langgenius/dify-plugin-daemon/releases)
@@ -85,11 +87,15 @@ chmod +x dpd
 
 按提示完成插件基本信息配置
 
+> 了解更多：[Dify 插件开发：Hello World 指南](/plugin_dev_zh/0211-getting-started-dify-tool)
+
 #### 2. 开发模式运行
 
 ```bash
 ./dpd plugin dev ./yourapp
 ```
+
+> 了解更多：[远程调试插件](/plugin_dev_zh/0411-remote-debug-a-plugin)
 
 #### 3. 调试与测试
 
@@ -119,6 +125,8 @@ pytest
 ```bash
 ./dpd plugin publish ./yourapp-{version}.zip
 ```
+
+> 了解更多：[发布概览](/plugin_dev_zh/0321-release-overview)、[发布到 Dify 市场](/plugin_dev_zh/0322-release-to-dify-marketplace)
 
 ### 插件分类
 
@@ -151,9 +159,13 @@ class ToolLabelEnum(Enum):
 Dify 支持多种类型的插件开发：
 
 - **工具插件**: 集成第三方 API 和服务
+  > 了解更多：[工具插件开发](/plugin_dev_zh/0211-getting-started-dify-tool)
 - **模型插件**: 集成 AI 模型
+  > 了解更多：[模型插件介绍](/plugin_dev_zh/0131-model-plugin-introduction)、[快速接入一个新模型](/plugin_dev_zh/0211-getting-started-new-model)
 - **Agent 策略插件**: 自定义 Agent 思考和决策策略
+  > 了解更多：[Agent 策略插件](/plugin_dev_zh/9433-agent-strategy-plugin)
 - **扩展插件**: 扩展 Dify 平台功能，例如 Endpoint 和 WebAPP
+  > 了解更多：[扩展插件](/plugin_dev_zh/9231-extension-plugin)
 
 ### 常用代码片段
 
@@ -200,6 +212,8 @@ def on_tool_invoke(params: dict) -> dict:
     }
 ```
 
+> 了解更多：[工具插件](/plugin_dev_zh/0222-tool-plugin)
+
 #### 认证配置示例
 
 ```python
@@ -217,6 +231,8 @@ def on_auth(auth: dict) -> AccessTokenAuth:
     )
 ```
 
+> 了解更多：[通过清单文件定义插件信息](/plugin_dev_zh/0411-plugin-info-by-manifest)
+
 ### 常见问题
 
 - **插件无法加载**: 检查 `manifest.yml` 格式是否正确
@@ -225,8 +241,15 @@ def on_auth(auth: dict) -> AccessTokenAuth:
 - **API 错误**: 检查认证信息是否正确
 - **macOS 安全警告**: 若提示 "Apple 无法验证" 错误，请前往 "设置 → 隐私与安全性 → 安全性"，选择 "仍要打开"
 
+> 了解更多常见问题解答：[常见问题解答](/plugin_dev_zh/0331-faq)
+
 ### 参考资源
 
 - [官方帮助文档](https://docs.dify.ai/v/zh-hans/)
 - [插件开发 SDK](https://github.com/langgenius/dify-plugin-sdks)
 - [插件示例库](https://github.com/langgenius/dify-plugin-examples)
+- [模型插件介绍](/plugin_dev_zh/0131-model-plugin-introduction)
+- [插件发布概览](/plugin_dev_zh/0321-release-overview)
+- [常见问题解答](/plugin_dev_zh/0331-faq)
+- [通用规范](/plugin_dev_zh/0411-general-specifications)
+- [插件开发入门](/plugin_dev_zh/0111-getting-started-dify-plugin)

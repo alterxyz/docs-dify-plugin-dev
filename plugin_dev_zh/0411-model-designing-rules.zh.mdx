@@ -10,8 +10,8 @@ title: 模型设计规则
 summary: 本文档详细定义了Dify模型插件开发的核心概念和结构，包括模型供应商(Provider)、AI模型实体(AIModelEntity)、模型类型(ModelType)、配置方法(ConfigurateMethod)、模型特性(ModelFeature)、参数规则(ParameterRule)、价格配置(PriceConfig)及各种凭证模式的详细数据结构规范。
 ---
 
-* 模型供应商规则基于 [Provider](model-designing-rules.md#provider) 实体。
-* 模型规则基于 [AIModelEntity](model-designing-rules.md#aimodelentity) 实体。
+* 模型供应商规则基于 [Provider](#provider) 实体。
+* 模型规则基于 [AIModelEntity](#aimodelentity) 实体。
 
 > 以下所有实体均基于 `Pydantic BaseModel`，可在 `entities` 模块中找到对应实体。
 
@@ -38,10 +38,10 @@ summary: 本文档详细定义了Dify模型插件开发的核心概念和结构�
   * `url` (object) 帮助链接，i18n
     * `zh_Hans` (string) \[optional] 中文链接
     * `en_US` (string) 英文链接
-* `supported_model_types` (array\[[ModelType](model-designing-rules.md#modeltype)]) 支持的模型类型
-* `configurate_methods` (array\[[ConfigurateMethod](model-designing-rules.md#configuratemethod)]) 配置方式
-* `provider_credential_schema` (\[[ProviderCredentialSchema](model-designing-rules.md#providercredentialschema)]) 供应商凭据规格
-* `model_credential_schema` (\[[ModelCredentialSchema](model-designing-rules.md#modelcredentialschema)]) 模型凭据规格
+* `supported_model_types` (array\[[ModelType](#modeltype)]) 支持的模型类型
+* `configurate_methods` (array\[[ConfigurateMethod](#configuratemethod)]) 配置方式
+* `provider_credential_schema` (\[[ProviderCredentialSchema](#providercredentialschema)]) 供应商凭据规格
+* `model_credential_schema` (\[[ModelCredentialSchema](#modelcredentialschema)]) 模型凭据规格
 
 ### AIModelEntity
 
@@ -49,10 +49,10 @@ summary: 本文档详细定义了Dify模型插件开发的核心概念和结构�
 * `label` (object) \[optional] 模型展示名称，i18n，可设置 `en_US` 英文、`zh_Hans` 中文两种语言
   * `zh_Hans` (string) \[optional] 中文标签名
   * `en_US` (string) 英文标签名
-* `model_type` (\[ModelType]\(#ModelType)) 模型类型
-* `features` (array\[\[ModelFeature]\(#ModelFeature)]) \[optional] 支持功能列表
+* `model_type` ([ModelType](#modeltype)) 模型类型
+* `features` (array\[[ModelFeature](#modelfeature)]) \[optional] 支持功能列表
 * `model_properties` (object) 模型属性
-  * `mode` (\[LLMMode]\(#LLMMode)) 模式 (模型类型 `llm` 可用)
+  * `mode` ([LLMMode](#llmmode)) 模式 (模型类型 `llm` 可用)
   * `context_size` (int) 上下文大小 (模型类型 `llm` `text-embedding` 可用)
   * `max_chunks` (int) 最大分块数量 (模型类型 `text-embedding moderation` 可用)
   * `file_upload_limit` (int) 文件最大上传限制，单位：MB。（模型类型 `speech2text` 可用）
@@ -66,8 +66,8 @@ summary: 本文档详细定义了Dify模型插件开发的核心概念和结构�
   * `audio_type` (string) 支持音频文件扩展格式，如：mp3,wav（模型类型 `tts` 可用）
   * `max_workers` (int) 支持文字音频转换并发任务数（模型类型 `tts` 可用）
   * `max_characters_per_chunk` (int) 每块最大字符数 (模型类型 `moderation` 可用)
-* `parameter_rules` (array\[[ParameterRule](model-designing-rules.md#parameterrule)]) \[optional] 模型调用参数规则
-* `pricing` (\[[PriceConfig](model-designing-rules.md#priceconfig)]) \[optional] 价格信息
+* `parameter_rules` (array\[[ParameterRule](#parameterrule)]) \[optional] 模型调用参数规则
+* `pricing` (\[[PriceConfig](#priceconfig)]) \[optional] 价格信息
 * `deprecated` (bool) 是否废弃。若废弃，模型列表将不再展示，但已经配置的可以继续使用，默认 False。
 
 ### ModelType
@@ -115,7 +115,9 @@ summary: 本文档详细定义了Dify模型插件开发的核心概念和结构�
 ### ParameterRule
 
 * `name` (string) 调用模型实际参数名
-* `use_template` (string) \[optional] 使用模板
+* `use_template` (string) \[optional] 使用模板 
+
+> 关于模板的具体使用，可以参考[创建新模型提供者](/plugin_dev_zh/0222-creating-new-model-provider)中的示例。
 
 默认预置了 5 种变量内容配置模板：
 
@@ -154,7 +156,7 @@ summary: 本文档详细定义了Dify模型插件开发的核心概念和结构�
 
 ### ProviderCredentialSchema
 
-* `credential_form_schemas` (array\[[CredentialFormSchema](model-designing-rules.md#credentialformschema)]) 凭据表单规范
+* `credential_form_schemas` (array\[[CredentialFormSchema](#credentialformschema)]) 凭据表单规范
 
 ### ModelCredentialSchema
 
@@ -165,7 +167,7 @@ summary: 本文档详细定义了Dify模型插件开发的核心概念和结构�
   * `placeholder` (object) 模型提示内容
     * `en_US`(string) 英文
     * `zh_Hans`(string) \[optional] 中文
-* `credential_form_schemas` (array\[[CredentialFormSchema](model-designing-rules.md#credentialformschema)]) 凭据表单规范
+* `credential_form_schemas` (array\[[CredentialFormSchema](#credentialformschema)]) 凭据表单规范
 
 ### CredentialFormSchema
 
@@ -173,15 +175,15 @@ summary: 本文档详细定义了Dify模型插件开发的核心概念和结构�
 * `label` (object) 表单项标签名
   * `en_US`(string) 英文
   * `zh_Hans` (string) \[optional] 中文
-* `type` (\[FormType]\(#FormType)) 表单项类型
+* `type` ([FormType](#formtype)) 表单项类型
 * `required` (bool) 是否必填
 * `default`(string) 默认值
-* `options` (array\[[FormOption](model-designing-rules.md#formoption)]) 表单项为 `select` 或 `radio` 专有属性，定义下拉内容
+* `options` (array\[[FormOption](#formoption)]) 表单项为 `select` 或 `radio` 专有属性，定义下拉内容
 * `placeholder`(object) 表单项为 `text-input` 专有属性，表单项 PlaceHolder
   * `en_US`(string) 英文
   * `zh_Hans` (string) \[optional] 中文
 * `max_length` (int) 表单项为`text-input`专有属性，定义输入最大长度，0 为不限制。
-* `show_on` (array\[[FormShowOnObject](model-designing-rules.md#formshowonobject)]) 当其他表单项值符合条件时显示，为空则始终显示。
+* `show_on` (array\[[FormShowOnObject](#formshowonobject)]) 当其他表单项值符合条件时显示，为空则始终显示。
 
 #### FormType
 
@@ -197,9 +199,16 @@ summary: 本文档详细定义了Dify模型插件开发的核心概念和结构�
   * `en_US`(string) 英文
   * `zh_Hans`(string) \[optional] 中文
 * `value` (string) 下拉选项值
-* `show_on` (array\[[FormShowOnObject](model-designing-rules.md#formshowonobject)]) 当其他表单项值符合条件时显示，为空则始终显示。
+* `show_on` (array\[[FormShowOnObject](#formshowonobject)]) 当其他表单项值符合条件时显示，为空则始终显示。
 
 #### FormShowOnObject
 
 * `variable` (string) 其他表单项变量名
 * `value` (string) 其他表单项变量值
+
+## 相关资源
+
+- [模型架构详解](/plugin_dev_zh/0412-model-schema) - 深入了解模型插件的架构规范
+- [快速接入一个新模型](/plugin_dev_zh/0211-getting-started-new-model) - 学习如何应用这些规则添加新模型
+- [通过清单文件定义插件信息](/plugin_dev_zh/0411-plugin-info-by-manifest) - 了解插件清单文件的配置
+- [创建新模型提供者](/plugin_dev_zh/0222-creating-new-model-provider) - 开发全新的模型提供商插件

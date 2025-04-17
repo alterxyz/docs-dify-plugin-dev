@@ -10,7 +10,7 @@ title: 初始化开发工具
 summary: 本文档详细介绍了Dify插件开发前的必要准备工作，包括安装Dify插件脚手架工具（dify-plugin-daemon）和配置Python环境（版本要求≥3.12）的完整步骤。文档还提供了各类型插件开发的参考链接。
 ---
 
-开发 Dify 插件需要进行以下准备。
+开发 Dify 插件需要进行以下准备。本文档是开始[插件开发](/plugin_dev_zh/0111-getting-started-dify-plugin)的第一步。
 
 * Dify 插件脚手架工具
 * Python 环境，版本号 ≥ 3.12
@@ -47,14 +47,20 @@ chmod +x dify-plugin-darwin-arm64
 
 ### **2. 初始化 Python 环境**
 
-详细说明请参考 [Python 安装教程](https://pythontest.com/python/installing-python-3-11/)，或询问 LLM 安装版本号 ≥ 3.12 的 Python 环境，
+详细说明请参考 [Python 安装教程](https://pythontest.com/python/installing-python-3-11/)，或询问 LLM 安装版本号 ≥ 3.12 的 Python 环境。
 
 ### 3. 开发插件
 
 请参考以下内容查看不同类型的插件开发示例：
 
-- [工具插件开发指南](tool-plugin.md)
-- [模型插件开发指南](model-plugin/)
-- [Agent策略插件开发指南](agent-strategy-plugin.md)
-- [扩展插件开发指南](extension-plugin.md)
-- [插件打包指南](bundle.md)
+- [工具插件开发指南](/plugin_dev_zh/0211-getting-started-dify-tool) - Hello World 入门教程
+- [模型插件开发指南](/plugin_dev_zh/0211-getting-started-new-model) - 快速接入一个新模型
+- [Agent策略插件开发指南](/plugin_dev_zh/9433-agent-strategy-plugin) - 创建自定义推理策略
+- [扩展插件开发指南](/plugin_dev_zh/9231-extension-plugin) - 通过 Webhook 实现外部服务集成
+- [插件打包和发布](/plugin_dev_zh/0321-release-overview) - 发布您的插件
+
+## 下一步学习
+
+- [Dify 插件开发：Hello World 指南](/plugin_dev_zh/0211-getting-started-dify-tool) - 开始您的第一个插件开发
+- [插件开发速查表](/plugin_dev_zh/0131-cheatsheet) - 了解常用命令和概念
+- [通过清单文件定义插件信息](/plugin_dev_zh/0411-plugin-info-by-manifest) - 学习插件元数据配置

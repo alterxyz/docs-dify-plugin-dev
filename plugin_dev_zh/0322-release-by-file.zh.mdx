@@ -10,28 +10,28 @@ title: 打包为本地文件与分享
 summary: 本文档介绍了如何将Dify插件项目打包为本地文件并分享给他人的详细步骤。内容包括插件打包前的准备工作、使用Dify插件开发工具执行打包命令、生成的.difypkg文件的安装方式以及如何分享插件文件给其他用户。
 ---
 
-完成插件开发后，你可以将插件项目打包为一个本地文件并分享给他人，通过插件文件后即可安装至 Dify Workspace 内。
+完成插件开发后，你可以将插件项目打包为一个本地文件并分享给他人，通过插件文件后即可安装至 Dify Workspace 内。如果您还没有开发插件，可以参考[插件开发入门指南](/plugin_dev_zh/0211-getting-started-dify-tool)。
 
 * **特点**：
-  * 便于**版本管理**和**开源共享**。
-  * 用户可通过插件链接直接安装，无需平台审核。
+  * 不依赖在线平台，**快速灵活**地分享插件。
+  * 适用于**私有插件**或**内部测试**。
 * **发布流程**：
-  * 将插件代码推送至 GitHub 仓库。
-  * 分享仓库链接，用户可通过链接将插件集成至 **Dify Workspace**。
+  * 将插件项目打包为本地文件。
+  * 在 Dify 插件页面上传文件安装插件。
 
 本文将介绍如何将插件项目打包为本地文件，以及如何使用本地文件安装插件。
 
 ### 前置准备
 
-* **Dify 插件开发工具**，详细说明请参考[初始化开发工具](../quick-start/develop-plugins/initialize-development-tools.md)。
+* **Dify 插件开发工具**，详细说明请参考[初始化开发工具](/plugin_dev_zh/0221-initialize-development-tools)。
 
 配置完成后，在终端输入 `dify version` 命令，检查是否输出版本号信息以确认已安装必要的开发工具。
 
 ### 打包插件
 
-> 打包插件前，请确保插件的 `manifest.yaml` 文件和 `/provider` 路径下的 `.yaml` 文件中的 `author` 字段与 GitHub ID 保持一致。
+> 打包插件前，请确保插件的 `manifest.yaml` 文件和 `/provider` 路径下的 `.yaml` 文件中的 `author` 字段与 GitHub ID 保持一致。关于清单文件的详细信息，请参考[通过清单文件定义插件信息](/plugin_dev_zh/0411-plugin-info-by-manifest)。
 
-插件项目开发完成后，请确保已完成[远程连接测试](../quick-start/develop-plugins/extension-plugin.md#tiao-shi-cha-jian)。需前往插件项目的上一级目录，运行以下插件打包命令：
+插件项目开发完成后，请确保已完成[远程调试测试](/plugin_dev_zh/0411-remote-debug-a-plugin)。需前往插件项目的上一级目录，运行以下插件打包命令：
 
 ```bash
 dify plugin package ./your_plugin_project
@@ -49,4 +49,15 @@ dify plugin package ./your_plugin_project
 
 ### 发布插件
 
-你可以将插件文件分享给他人，或上传至互联网供他人下载。
+你可以将插件文件分享给他人，或上传至互联网供他人下载。如果你希望更广泛地分享你的插件，可以考虑：
+
+1. [发布至个人GitHub仓库](/plugin_dev_zh/0322-release-to-individual-github-repo) - 通过GitHub分享插件
+2. [发布至Dify Marketplace](/plugin_dev_zh/0322-release-to-dify-marketplace) - 在官方市场发布插件
+
+## 相关资源
+
+- [发布插件](/plugin_dev_zh/0321-release-overview) - 了解各种发布方式
+- [初始化开发工具](/plugin_dev_zh/0221-initialize-development-tools) - 配置插件开发环境
+- [远程调试插件](/plugin_dev_zh/0411-remote-debug-a-plugin) - 学习插件调试方法
+- [通过清单文件定义插件信息](/plugin_dev_zh/0411-plugin-info-by-manifest) - 定义插件元数据
+- [插件开发入门指南](/plugin_dev_zh/0211-getting-started-dify-tool) - 从零开始开发插件

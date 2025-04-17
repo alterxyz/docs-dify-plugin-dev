@@ -14,7 +14,7 @@ summary: 本文档详细介绍了如何开发Dify的工具插件，以Google Sea
 
 ![Tool Plugin Example](https://assets-docs.dify.ai/2024/12/7e7bcf1f9e3acf72c6917ea9de4e4613.png)
 
-在本文中，**“工具插件”** 指的是一个完整的项目，其中包含工具供应商文件、功能代码等结构。一个工具供应商内允许包含多个 Tools（可以理解为单个工具中提供的额外功能），结构如下：
+在本文中，**"工具插件"** 指的是一个完整的项目，其中包含工具供应商文件、功能代码等结构。一个工具供应商内允许包含多个 Tools（可以理解为单个工具中提供的额外功能），结构如下：
 
 ```
 - 工具供应商
@@ -31,7 +31,7 @@ summary: 本文档详细介绍了如何开发Dify的工具插件，以Google Sea
 -   Dify 插件脚手架工具
 -   Python 环境，版本号 ≥ 3.12
 
-关于如何准备插件开发的脚手架工具，详细说明请参考[初始化开发工具](initialize-development-tools.md)。
+关于如何准备插件开发的脚手架工具，详细说明请参考[初始化开发工具](/plugin_dev_zh/0221-initialize-development-tools)。如果你是初次开发插件，建议先阅读[Dify 插件开发：Hello World 指南](/plugin_dev_zh/0211-getting-started-dify-tool)。
 
 ### 创建新项目
 
@@ -53,7 +53,7 @@ dify plugin init
 
 脚手架工具内的所有模板均已提供完整的代码项目。在本文实例中，选择 `Tool` 插件。
 
-> 如果你已熟悉插件开发，无需借助模板，可参考[接口文档](../../schema-definition/)指引完成不同类型的插件开发。
+> 如果你已熟悉插件开发，无需借助模板，可参考[通用规范](/plugin_dev_zh/0411-general-specifications)指引完成不同类型的插件开发。
 
 ![插件类型：工具](https://assets-docs.dify.ai/2024/12/dd3c0f9a66454e15868eabced7b74fd6.png)
 
@@ -66,7 +66,7 @@ dify plugin init
 -   启用持久化存储 Storage，分配默认大小存储
 -   允许注册 Endpoint
 
-> 在终端内使用方向键选择权限，使用 “Tab” 按钮授予权限。
+> 在终端内使用方向键选择权限，使用 "Tab" 按钮授予权限。
 
 勾选所有权限项后，轻点回车完成插件的创建。系统将自动生成插件项目代码。
 
@@ -172,7 +172,7 @@ extra:
         source: google.py
 ```
 
--   其中 `credentials_for_provider` 的子级结构需要满足 [ProviderConfig](../../schema-definition/general-specifications.md#providerconfig) 的规范。
+-   其中 `credentials_for_provider` 的子级结构需要满足 [通用规范](/plugin_dev_zh/0411-general-specifications) 的要求。
 -   需要指定该供应商包含了哪些工具。本示例仅包含了一个 `tools/google_search.yaml` 文件。
 -   作为供应商，除了定义其基础信息外，还需要实现一些它的代码逻辑，因此需要指定其实现逻辑，在本例子中，将功能的代码文件放在了 `google.py` 中，但是暂时不实现它，而是先编写 `google_search` 的代码。
 
@@ -285,7 +285,7 @@ class GoogleSearchTool(Tool):
         yield self.create_json_message(valuable_res)
 ```
 
-该例子的含义为请求 `serpapi`，并使用 `self.create_json_message` 返回一串 `json` 的格式化数据，如果想了解更多的返回数据类型，可以参考[工具接口文档](../../schema-definition/tool.md)。
+该例子的含义为请求 `serpapi`，并使用 `self.create_json_message` 返回一串 `json` 的格式化数据，如果想了解更多的返回数据类型，可以参考[远程调试插件](/plugin_dev_zh/0411-remote-debug-a-plugin)和[持久化存储 KV](/plugin_dev_zh/0411-persistent-storage-kv)文档。
 
 #### 4. 完成工具供应商代码
 
@@ -315,7 +315,7 @@ class GoogleProvider(ToolProvider):
 
 插件开发完成后，接下来需要测试插件是否可以正常运行。Dify 提供便捷地远程调试方式，帮助你快速在测试环境中验证插件功能。
 
-前往[“插件管理”](https://cloud.dify.ai/plugins)页获取远程服务器地址和调试 Key。
+前往["插件管理"](https://cloud.dify.ai/plugins)页获取远程服务器地址和调试 Key。
 
 ![Remote Debug Key](https://assets-docs.dify.ai/2024/12/053415ef127f1f4d6dd85dd3ae79626a.png)
 
@@ -348,23 +348,30 @@ dify plugin package ./google
 
 ### 发布插件（可选）
 
-如果想要将插件发布至 Dify Marketplace，请确保你的插件遵循了[插件发布规范](https://docs.dify.ai/zh-hans/plugins/publish-plugins/publish-to-dify-marketplace)。审核通过后，代码将合并至主分支并自动上线至 [Dify Marketplace](https://marketplace.dify.ai/)。
+如果想要将插件发布至 Dify Marketplace，请确保你的插件遵循了[发布到 Dify 市场](/plugin_dev_zh/0322-release-to-dify-marketplace)中的规范。审核通过后，代码将合并至主分支并自动上线至 [Dify Marketplace](https://marketplace.dify.ai/)。
 
-[发布插件指南](../../publish-plugins/)
+[发布概览](/plugin_dev_zh/0321-release-overview)
 
 ### 探索更多
 
 #### **快速开始：**
 
--   [开发 Extension 插件](extension-plugin.md)
--   [开发 Model 插件](model-plugin/)
--   [Bundle 插件：将多个插件打包](bundle.md)
+-   [开发 Extension 插件](/plugin_dev_zh/9231-extension-plugin)
+-   [开发 Model 插件](/plugin_dev_zh/0211-getting-started-new-model)
+-   [Bundle 插件：将多个插件打包](/plugin_dev_zh/9241-bundle)
 
 #### **插件接口文档：**
 
--   [Manifest](../../schema-definition/manifest.md) 结构
--   [Endpoint](../../schema-definition/endpoint.md) 详细定义
--   [反向调用 Dify 能力](../../schema-definition/reverse-invocation-of-the-dify-service/)
--   [工具](../../schema-definition/tool.md)
--   [模型](../../schema-definition/model/)
--   [扩展 Agent 策略](../../schema-definition/agent.md)
+-   [通过清单文件定义插件信息](/plugin_dev_zh/0411-plugin-info-by-manifest) - Manifest 结构
+-   [端点](/plugin_dev_zh/0432-endpoint) - Endpoint 详细定义
+-   [反向调用](/plugin_dev_zh/9241-reverse-invocation) - 反向调用 Dify 能力
+-   [通用规范](/plugin_dev_zh/0411-general-specifications) - 工具规范
+-   [模型架构](/plugin_dev_zh/0412-model-schema) - 模型
+-   [Agent 插件](/plugin_dev_zh/9232-agent) - 扩展 Agent 策略
+
+## 下一步学习
+
+- [远程调试插件](/plugin_dev_zh/0411-remote-debug-a-plugin) - 了解更高级的调试技巧
+- [持久化存储](/plugin_dev_zh/0411-persistent-storage-kv) - 学习如何在插件中使用数据存储
+- [Slack 机器人插件开发示例](/plugin_dev_zh/0432-develop-a-slack-bot-plugin) - 查看更复杂的插件开发案例
+- [高级工具开发](/plugin_dev_zh/9223-tool) - 探索工具插件的高级功能
