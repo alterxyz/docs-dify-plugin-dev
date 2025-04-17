@@ -1,0 +1,120 @@
+---
+dimensions:
+  type:
+    primary: reference
+    detail: core
+  level: beginner
+standard_title: General Specifications
+language: en
+title: General Specification Definitions
+summary: This document details the common structures and specifications in Dify plugin development, including path specifications, internationalization objects (I18nObject), provider form structures (ProviderConfig), model configurations (ModelConfig), node responses (NodeResponse), and tool selectors (ToolSelector), defining their purpose and usage.
+---
+
+This article will briefly introduce the common structures in plugin development. During the development process, it is strongly recommended to read this in conjunction with [Basic Concepts of Plugin Development](/plugin_dev_en/0111-getting-started-dify-plugin.en) and the [Developer Cheat Sheet](/plugin_dev_en/0131-cheatsheet.en) to better understand the overall architecture.
+
+### Path Specifications
+
+When filling in file paths in the Manifest or any yaml file, follow these two specifications based on the file type:
+
+*   If the target file is a multimedia file such as an image or video, for example, when filling in the plugin's `icon`, you should place these files in the `_assets` folder under the plugin's root directory.
+*   If the target file is a plain text file, such as `.py`, `.yaml`, or other code files, you should fill in the absolute path of the file within the plugin project.
+
+### Common Structures
+
+When defining plugins, some data structures can be shared among tools, models, and Endpoints. These shared structures are defined here.
+
+#### I18nObject
+
+`I18nObject` is an internationalization structure compliant with the [IETF BCP 47](https://tools.ietf.org/html/bcp47) standard. The currently supported four languages are:
+
+*   en\_US
+*   zh\_Hans
+*   ja\_Jp
+*   pt\_BR
+
+#### ProviderConfig
+
+`ProviderConfig` is a general provider form structure applicable to `Tool` and `Endpoint`.
+
+*   `name`(string): Form item name
+*   `label`([I18nObject](#i18nobject), required): Complies with [IETF BCP 47](https://tools.ietf.org/html/bcp47)
+*   `type`([provider\_config\_type](#providerconfigtype-string), required): Form type
+*   `scope`([provider\_config\_scope](#providerconfigscope-string)): Optional range, varies based on `type`
+*   `required`(bool): Cannot be empty
+*   `default`(any): Default value, only supports basic types `float`, `int`, `string`
+*   `options`(list\[[provider\_config\_option](#providerconfigoption-object)]): Options, used only when type is `select`
+*   `helper`(object): Label for the help document link, complies with [IETF BCP 47](https://tools.ietf.org/html/bcp47)
+*   `url` (string): Help document link
+*   `placeholder`(object): Complies with [IETF BCP 47](https://tools.ietf.org/html/bcp47)
+
+#### ProviderConfigOption(object)
+
+*   `value`(string, required): Value
+*   `label`(object, required): Complies with [IETF BCP 47](https://tools.ietf.org/html/bcp47)
+
+#### ProviderConfigType(string)
+
+*   `secret-input` (string): Configuration information will be encrypted
+*   `text-input`(string): Plain text
+*   `select`(string): Dropdown box
+*   `boolean`(bool): Switch
+*   `model-selector`(object): Model configuration information, including provider name, model name, model parameters, etc.
+*   `app-selector`(object): app id
+*   `tool-selector`(object): Tool configuration information, including tool provider, name, parameters, etc.
+*   `dataset-selector`(string): TBD
+
+#### ProviderConfigScope(string)
+
+*   When `type` is `model-selector`
+    *   `all`
+    *   `llm`
+    *   `text-embedding`
+    *   `rerank`
+    *   `tts`
+    *   `speech2text`
+    *   `moderation`
+    *   `vision`
+*   When `type` is `app-selector`
+    *   `all`
+    *   `chat`
+    *   `workflow`
+    *   `completion`
+*   When `type` is `tool-selector`
+    *   `all`
+    *   `plugin`
+    *   `api`
+    *   `workflow`
+
+#### ModelConfig
+
+*   `provider` (string): Model provider name including plugin\_id, e.g., `langgenius/openai/openai`.
+*   `model` (string): Specific model name.
+*   `model_type` (enum): Enum for model type, refer to the [Model Design Rules](/plugin_dev_en/0411-model-designing-rules.en#modeltype) document.
+
+#### NodeResponse
+
+*   `inputs` (dict): Variables finally input into the node.
+*   `outputs` (dict): Output results of the node.
+*   `process_data` (dict): Data generated during node execution.
+
+#### ToolSelector
+
+*   `provider_id` (string): Tool provider name
+*   `tool_name` (string): Tool name
+*   `tool_description` (string): Tool description
+*   `tool_configuration` (dict\[str, Any]): Tool configuration information
+*   `tool_parameters` (dict\[str, dict]): Parameters requiring LLM inference
+    *   `name` (string): Parameter name
+    *   `type` (string): Parameter type
+    *   `required` (bool): Whether it is required
+    *   `description` (string): Parameter description
+    *   `default` (any): Default value
+    *   `options`(list\[string]): Options
+
+## Related Resources
+
+-   [Basic Concepts of Plugin Development](/plugin_dev_en/0111-getting-started-dify-plugin.en) - Comprehensive understanding of Dify plugin development
+-   [Developer Cheat Sheet](/plugin_dev_en/0131-cheatsheet.en) - Quick reference for common commands and concepts in plugin development
+-   [Define Plugin Information via Manifest File](/plugin_dev_en/0411-plugin-info-by-manifest.en) - Understand how to define plugin metadata
+-   [Tool Plugin Development Details](/plugin_dev_en/0222-tool-plugin.en) - Detailed understanding of the tool plugin development process
+-   [Model Design Rules](/plugin_dev_en/0411-model-designing-rules.en) - Understand the specifications for model configuration

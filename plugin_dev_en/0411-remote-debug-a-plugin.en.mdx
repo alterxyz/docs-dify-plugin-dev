@@ -1,0 +1,32 @@
+---
+dimensions:
+  type:
+    primary: reference
+    detail: core
+  level: beginner
+standard_title: Remote Debug a Plugin
+language: en
+title: Plugin Debugging
+summary: This document introduces how to use Dify's remote debugging feature to test plugins. It details the complete process of obtaining debugging information, configuring environment variable files, starting remote plugin debugging, and verifying the plugin installation status. This allows developers to test plugins in the Dify environment in real-time while developing locally.
+---
+
+Once plugin development is complete, the next step is to test whether the plugin runs correctly. Dify provides a convenient remote debugging method to help you quickly verify plugin functionality in a test environment.
+
+Go to the ["Plugin Management"](https://cloud.dify.ai/plugins) page to get the remote server address and debug Key.
+
+![Remote Debug Plugin](https://assets-docs.dify.ai/2024/12/053415ef127f1f4d6dd85dd3ae79626a.png)
+
+Go back to the plugin project, copy the `.env.example` file and rename it to `.env`. Fill in the obtained remote server address and debug Key information.
+
+`.env` file:
+
+```bash
+INSTALL_METHOD=remote
+REMOTE_INSTALL_HOST=remote
+REMOTE_INSTALL_PORT=5003
+REMOTE_INSTALL_KEY=****-****-****-****-****
+```
+
+Run the `python -m main` command to start the plugin. On the plugin page, you can see that the plugin has been installed into the Workspace, and other team members can also access the plugin.
+
+![Plugin installed to Workspace](https://assets-docs.dify.ai/2024/12/ec26e5afc57bbfeb807719638f603807.png)

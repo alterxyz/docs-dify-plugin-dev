@@ -1,0 +1,114 @@
+---
+dimensions:
+    type:
+        primary: implementation
+        detail: basic
+    level: beginner
+standard_title: Getting Started New Model
+language: en
+title: Quick Integration of a New Model
+summary: This document guides non-professional developers on how to add new models to Dify, focusing on adding new model variants to existing providers by modifying configuration files. It covers the complete process from forking the repository to copying and modifying model configurations, updating provider versions, local testing, and submitting contributions.
+---
+
+Welcome to the world of Dify plugin development! Dify's powerful features are made possible through the collective efforts of community contributors. We believe that even if you're not a professional programmer, as long as you're passionate about AI technology and willing to research, you can contribute to Dify, such as helping Dify support more and newer AI models.
+
+This article will guide you through the most common and simplest contribution in the most straightforward way: adding a **new model variant** for a model provider that Dify **already supports**. This approach usually **only requires configuration file modifications**, without coding, making it perfect for your first contribution!
+
+> **Related Concepts**: Before starting, we recommend reading the [Model Plugin](/plugin_dev_en/0131-model-plugin-introduction.en) documentation to understand the basic concepts and structure of model plugins.
+
+**This quick integration method is suitable when:**
+
+- The new model belongs to a provider already supported by Dify (such as OpenAI, Google Gemini, Anthropic Claude, etc.).
+- The new model uses the same API authentication and basic calling logic as other models in the same series.
+- The main differences are in model ID, context length, maximum tokens, pricing, and other configuration parameters.
+
+_(If the model you need to add requires new API logic or supports special features, it will involve Python coding. Please refer to [Creating New Model Provider](/plugin_dev_en/0222-creating-new-model-provider.en) for more detailed guidance.)_
+
+**Prerequisites:**
+
+- Familiarity with basic Git operations (Fork, Clone, Pull Request).
+- A GitHub account.
+- Dify plugin development toolkit installed and configured (refer to [Initialize Development Tools](/plugin_dev_en/0221-initialize-development-tools.en)).
+
+**Steps:**
+
+1. **Fork & Clone Official Plugin Repository:**
+
+        - Visit the Dify official plugin repository at `https://github.com/langgenius/dify-official-plugins`.
+        - Click the "Fork" button to fork the repository to your GitHub account.
+        - Use Git to clone your forked repository to your local computer.
+
+2. **Locate and Copy Model Configuration File:**
+
+        - In your local repository, navigate to the `models/` directory and find the provider folder you want to add a model to, such as `vertex_ai`.
+        - Enter the corresponding model type subdirectory, usually `models/llm/` (for text generation models).
+        - Find a YAML configuration file for an existing model most similar to the one you want to add (e.g., `gemini-1.0-pro-001.yaml`).
+        - Copy this YAML file and rename it to clearly identify the new variant (e.g., `gemini-1.5-pro-latest.yaml`).
+
+3. **Modify Model Configuration (YAML):**
+
+        - Open your renamed YAML file (e.g., `gemini-1.5-pro-latest.yaml`).
+        - **Core Step:** Referring to the **model provider's official documentation**, carefully verify and modify the following key information:
+                - `model`: **Must** update to the new variant's official API identifier.
+                - `label`: **Must** update to the model name shown in the Dify interface (recommended to provide both `en_US` and `zh_Hans` languages).
+                - `model_properties`: Update `context_size` (context window size).
+                - `parameter_rules`: Check and update model parameter limits, especially `max_tokens` (maximum output tokens) `default`, `min`, `max` values.
+                - `pricing`: Update model's `input` and `output` pricing, along with `unit` (usually `0.000001` for per million tokens) and `currency`.
+        - _(Reference)_ For detailed specifications of model YAML file fields, check [Model Designing Rules](/plugin_dev_en/0411-model-designing-rules.en) and [Model Schema Definition](/plugin_dev_en/0412-model-schema.en).
+
+        **Example (Adding Gemini 1.5 Pro):**
+
+        | Parameter         | Old Model (Example)   | New Gemini 1.5 Pro (Example) | Notes                                    |
+        | :---------------- | :------------------- | :----------------------- | :---------------------------------------- |
+        | `model`           | `gemini-1.0-pro-001` | `gemini-1.5-pro-latest`  | **Must** change to official model ID       |
+        | `label: en_US`    | Gemini 1.0 Pro       | Gemini 1.5 Pro           | **Must** change to user-visible label      |
+        | `context_size`    | 30720                | 1048576                  | **Must** update per official docs          |
+        | `max_tokens` (max)| 2048                 | 8192                     | **Must** update default/max per docs       |
+
+4. **Update Provider Manifest Version:**
+
+        - Return to the model provider's root directory (e.g., `models/vertex_ai/`).
+        - Find and open the `manifest.yaml` file.
+        - Increment the `version` field by a minor version (e.g., `version: 0.0.8` -> `version: 0.0.9`). This tells Dify it's an update.
+
+5. **Package and Local Testing:**
+
+        - Open your terminal (command line tool).
+        - **Ensure your current directory is the `dify-official-plugins` repository root** (the directory containing `models`, `tools`, etc.).
+        - Run the packaging command:
+
+        ```bash
+        # Replace <provider_name> with the actual provider directory name, e.g., cohere or vertex_ai
+        dify plugin package models/<provider_name>
+        ```
+
+        - _Upon success, you'll see a message like `plugin packaged successfully, output path: <provider_name>.difypkg`, and a plugin package file named `<provider_name>.difypkg` will be generated in the current project root directory._
+        - Log in to your Dify instance (local deployment or cloud version).
+        - Click the **"Plugins"** menu item on the top navigation bar.
+        - On the plugins page, click the **"Install Plugin"** button.
+        - Select the **"Local Plugin"** tab.
+        - Click the upload area to select or drag-and-drop your locally generated `<provider_name>.difypkg` file.
+        - Wait for the plugin installation or update to complete.
+        - After successful installation, usually need to go to "Settings" -> "Model Providers" to find the corresponding provider and configure your API credentials (if you haven't done so before).
+        - Create a new Dify application or edit an existing one, try selecting your newly added model in "Prompt Engineering" -> "Model" settings. Perform some simple conversation or call tests to ensure it works properly and returns expected results.
+
+6. **Submit Your Contribution:**
+        - After successful local testing, commit your changes (new model YAML file and updated `manifest.yaml`) and push them to your forked GitHub repository using Git.
+        - On GitHub, create a Pull Request (PR) to the main `langgenius/dify-official-plugins` repository. In the PR description, briefly explain which model you added and include a link to the model's official documentation for reviewer reference.
+
+---
+
+**What's Next?**
+
+Once your PR is reviewed and merged, your contribution becomes part of the official Dify plugins, and all Dify users can easily use this new model!
+
+This quick integration method is the fastest way to make Dify support new models. Of course, if this model needs to support more complex features in the future (such as image input, function calling, etc.), experienced developers might need to update the plugin at the code level. But your contribution now is already very valuable!
+
+**Explore More:**
+
+- [Model Schema Definition](/plugin_dev_en/0412-model-schema.en) (Learn detailed rules for model YAML files)
+- [Model Designing Rules](/plugin_dev_en/0411-model-designing-rules.en) (Learn standards for model parameter design)
+- [Define Plugin Info by Manifest](/plugin_dev_en/0411-plugin-info-by-manifest.en) (Learn about `manifest.yaml`)
+- [Creating New Model Provider](/plugin_dev_en/0222-creating-new-model-provider.en) (Learn how to add new model providers)
+- [Release to Dify Marketplace](/plugin_dev_en/0322-release-to-dify-marketplace.en) (Learn how to publish your plugin)
+- [Dify Official Plugin Repository](https://github.com/langgenius/dify-official-plugins) (See examples of other plugins)

@@ -15,6 +15,136 @@
     "navigation": {
         "languages": [
             {
+                "language": "en",
+                "tabs": [
+                    {
+                        "tab": "Plugin Development",
+                        "groups": [
+                            {
+                                "group": "Concepts & Getting Started",
+                                "pages": [
+                                    {
+                                        "group": "Overview",
+                                        "pages": [
+                                            "plugin_dev_en/0111-getting-started-dify-plugin.en"
+                                        ]
+                                    }
+                                ]
+                            },
+                            {
+                                "group": "Development Practices",
+                                "pages": [
+                                    {
+                                        "group": "Quick Start",
+                                        "pages": [
+                                            "plugin_dev_en/0211-getting-started-dify-tool.en",
+                                            "plugin_dev_en/0211-getting-started-new-model.en"
+                                        ]
+                                    },
+                                    {
+                                        "group": "Developing Dify Plugins",
+                                        "pages": [
+                                            "plugin_dev_en/0221-initialize-development-tools.en",
+                                            "plugin_dev_en/0222-creating-new-model-provider-extra.en",
+                                            "plugin_dev_en/0222-creating-new-model-provider.en",
+                                            "plugin_dev_en/0222-tool-plugin.en"
+                                        ]
+                                    }
+                                ]
+                            },
+                            {
+                                "group": "Contribution & Publishing",
+                                "pages": [
+                                    {
+                                        "group": "Code of Conduct & Standards",
+                                        "pages": [
+                                            "plugin_dev_en/0312-contributor-covenant-code-of-conduct.en",
+                                            "plugin_dev_en/0312-privacy-protection-guidelines.en"
+                                        ]
+                                    },
+                                    {
+                                        "group": "Publishing & Listing",
+                                        "pages": [
+                                            "plugin_dev_en/0321-release-overview.en",
+                                            "plugin_dev_en/0322-release-by-file.en",
+                                            "plugin_dev_en/0322-release-to-dify-marketplace.en",
+                                            "plugin_dev_en/0322-release-to-individual-github-repo.en"
+                                        ]
+                                    },
+                                    {
+                                        "group": "FAQ",
+                                        "pages": [
+                                            "plugin_dev_en/0331-faq.en"
+                                        ]
+                                    }
+                                ]
+                            },
+                            {
+                                "group": "Examples & Use Cases",
+                                "pages": [
+                                    {
+                                        "group": "Development Examples",
+                                        "pages": [
+                                            "plugin_dev_en/0432-develop-a-slack-bot-plugin.en",
+                                            "plugin_dev_en/0432-endpoint.en"
+                                        ]
+                                    }
+                                ]
+                            },
+                            {
+                                "group": "Advanced Development",
+                                "pages": [
+                                    {
+                                        "group": "Extension & Agent",
+                                        "pages": [
+                                            "plugin_dev_en/9231-extension-plugin.en",
+                                            "plugin_dev_en/9232-agent.en",
+                                            "plugin_dev_en/9433-agent-strategy-plugin.en"
+                                        ]
+                                    },
+                                    {
+                                        "group": "Reverse Calling",
+                                        "pages": [
+                                            "plugin_dev_en/9241-bundle.en",
+                                            "plugin_dev_en/9241-reverse-invocation.en",
+                                            "plugin_dev_en/9242-reverse-invocation-app.en",
+                                            "plugin_dev_en/9242-reverse-invocation-model.en",
+                                            "plugin_dev_en/9242-reverse-invocation-tool.en",
+                                            "plugin_dev_en/9243-customizable-model.en",
+                                            "plugin_dev_en/9243-reverse-invocation-node.en"
+                                        ]
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "tab": "Reference & Specifications",
+                        "groups": [
+                            {
+                                "group": "Core Concepts & Reference",
+                                "pages": [
+                                    "plugin_dev_en/0131-cheatsheet.en",
+                                    "plugin_dev_en/0131-model-plugin-introduction.en"
+                                ]
+                            },
+                            {
+                                "group": "Core Specifications & Features",
+                                "pages": [
+                                    "plugin_dev_en/0411-general-specifications.en",
+                                    "plugin_dev_en/0411-model-designing-rules.en",
+                                    "plugin_dev_en/0411-persistent-storage-kv.en",
+                                    "plugin_dev_en/0411-plugin-info-by-manifest.en",
+                                    "plugin_dev_en/0411-remote-debug-a-plugin.en",
+                                    "plugin_dev_en/0411-tool.en",
+                                    "plugin_dev_en/0412-model-schema.en"
+                                ]
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
                 "language": "zh",
                 "tabs": [
                     {

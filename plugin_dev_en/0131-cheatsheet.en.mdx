@@ -1,0 +1,255 @@
+---
+dimensions:
+    type:
+        primary: conceptual
+        detail: architecture
+    level: beginner
+standard_title: Cheatsheet
+language: en
+title: Dify Plugin Development Cheatsheet
+summary: Comprehensive reference guide for Dify plugin development, including environment requirements, installation methods, development workflow, plugin categories and types, common code snippets, and troubleshooting solutions. Ideal for developers' quick reference.
+---
+
+### Environment Requirements
+
+- Python version ≥ 3.12
+- Dify Plugin Scaffold Tool (dify-plugin-daemon)
+
+> Learn more: [Initialize Development Tools](/plugin_dev_en/0221-initialize-development-tools.en)
+
+### Get Dify Plugin Development Kit
+
+[Dify Plugin CLI](https://github.com/langgenius/dify-plugin-daemon/releases)
+
+#### Installation Methods for Different Platforms
+
+**macOS [Brew](https://github.com/langgenius/homebrew-dify) (Global Installation):**
+
+```bash
+brew tap langgenius/dify
+brew install dify
+```
+
+After installation, open a new terminal window and run the `dify version` command. If it outputs version information, the installation was successful.
+
+**macOS ARM (M series chips):**
+
+```bash
+# Download dify-plugin-darwin-arm64
+chmod +x dify-plugin-darwin-arm64
+./dify-plugin-darwin-arm64 version
+```
+
+**macOS Intel:**
+
+```bash
+# Download dify-plugin-darwin-amd64
+chmod +x dify-plugin-darwin-amd64
+./dify-plugin-darwin-amd64 version
+```
+
+**Linux:**
+
+```bash
+# Download dify-plugin-linux-amd64
+chmod +x dify-plugin-linux-amd64
+./dify-plugin-linux-amd64 version
+```
+
+**Global Installation (Recommended):**
+
+```bash
+# Rename and move to system path
+# Example (macOS ARM)
+mv dify-plugin-darwin-arm64 dify
+sudo mv dify /usr/local/bin/
+dify version
+```
+
+### Running the Development Package
+
+#### Initialization and Verification
+
+If the development package is named `dpd`, replace with your actual filename if different
+
+```bash
+chmod +x dpd
+./dpd version
+```
+
+### Plugin Development Workflow
+
+#### 1. Create a New Plugin
+
+```bash
+./dpd plugin init
+```
+
+Follow the prompts to complete the basic plugin information configuration
+
+> Learn more: [Dify Plugin Development: Hello World Guide](/plugin_dev_en/0211-getting-started-dify-tool.en)
+
+#### 2. Run in Development Mode
+
+```bash
+./dpd plugin dev ./yourapp
+```
+
+> Learn more: [Remote Debugging of Plugins](/plugin_dev_en/0411-remote-debug-a-plugin.en)
+
+#### 3. Debugging and Testing
+
+Validate plugin validity:
+
+```bash
+./dpd plugin validate ./yourapp
+```
+
+Run plugin unit tests:
+
+```bash
+cd yourapp
+pytest
+```
+
+#### 4. Packaging and Deployment
+
+Package the plugin:
+
+```bash
+./dpd plugin package ./yourapp
+```
+
+Publish the plugin:
+
+```bash
+./dpd plugin publish ./yourapp-{version}.zip
+```
+
+> Learn more: [Publishing Overview](/plugin_dev_en/0321-release-overview.en), [Publishing to Dify Marketplace](/plugin_dev_en/0322-release-to-dify-marketplace.en)
+
+### Plugin Categories
+
+#### Tool Labels
+
+Category `tag` [class ToolLabelEnum(Enum)](https://github.com/langgenius/dify-plugin-sdks/blob/main/python/dify_plugin/entities/tool.py)
+
+```python
+class ToolLabelEnum(Enum):
+    SEARCH = "search"
+    IMAGE = "image"
+    VIDEOS = "videos"
+    WEATHER = "weather"
+    FINANCE = "finance"
+    DESIGN = "design"
+    TRAVEL = "travel"
+    SOCIAL = "social"
+    NEWS = "news"
+    MEDICAL = "medical"
+    PRODUCTIVITY = "productivity"
+    EDUCATION = "education"
+    BUSINESS = "business"
+    ENTERTAINMENT = "entertainment"
+    UTILITIES = "utilities"
+    OTHER = "other"
+```
+
+### Plugin Type Reference
+
+Dify supports the development of multiple plugin types:
+
+- **Tool Plugins**: Integrate third-party APIs and services
+  > Learn more: [Tool Plugin Development](/plugin_dev_en/0211-getting-started-dify-tool.en)
+- **Model Plugins**: Integrate AI models
+  > Learn more: [Model Plugin Introduction](/plugin_dev_en/0131-model-plugin-introduction.en), [Quick Integration of a New Model](/plugin_dev_en/0211-getting-started-new-model.en)
+- **Agent Strategy Plugins**: Customize Agent thinking and decision-making strategies
+  > Learn more: [Agent Strategy Plugins](/plugin_dev_en/9433-agent-strategy-plugin.en)
+- **Extension Plugins**: Extend Dify platform functionality, such as Endpoints and WebAPP
+  > Learn more: [Extension Plugins](/plugin_dev_en/9231-extension-plugin.en)
+
+### Common Code Snippets
+
+#### Tool Definition Example
+
+```python
+from typing import List, Optional
+from pydantic import BaseModel, Field
+from dify_plugin.tool import Tool, ToolLabelEnum
+
+class SearchParams(BaseModel):
+    query: str = Field(..., description="Search query keywords")
+    limit: int = Field(default=5, description="Limit for number of returned results")
+
+class SearchResult(BaseModel):
+    title: str = Field(..., description="Result title")
+    url: str = Field(..., description="Result URL")
+    snippet: str = Field(..., description="Result snippet")
+
+class SearchTool(Tool):
+    name: str = "search"
+    description: str = "Search for information on the internet"
+    labels: List[str] = [ToolLabelEnum.SEARCH]
+    parameters: BaseModel = SearchParams
+    returns: BaseModel = SearchResult
+```
+
+#### Tool Implementation Example
+
+```python
+@tool.on_invoke
+def on_tool_invoke(params: dict) -> dict:
+    query = params["query"]
+    limit = params.get("limit", 5)
+
+    # Implement search logic
+    results = search_api_call(query, limit)
+
+    # Return results
+    return {
+        "title": results["title"],
+        "url": results["url"],
+        "snippet": results["snippet"]
+    }
+```
+
+> Learn more: [Tool Plugins](/plugin_dev_en/0222-tool-plugin.en)
+
+#### Authentication Configuration Example
+
+```python
+from dify_plugin.auth import AuthModel, AccessTokenAuth
+
+class MyPluginAuth(AuthModel):
+    api_key: str = Field(..., description="API key")
+
+@plugin.on_auth
+def on_auth(auth: dict) -> AccessTokenAuth:
+    return AccessTokenAuth(
+        access_token=auth["api_key"],
+        header_key="Authorization",
+        header_value_prefix="Bearer "
+    )
+```
+
+> Learn more: [Define Plugin Information via Manifest File](/plugin_dev_en/0411-plugin-info-by-manifest.en)
+
+### Common Issues
+
+- **Plugin Cannot Load**: Check if the `manifest.yml` format is correct
+- **Permission Issues**: Run `chmod +x dpd` to ensure execution permissions
+- **Dependency Issues**: Check if `requirements.txt` is complete
+- **API Errors**: Verify authentication information is correct
+- **macOS Security Warning**: If you see an "Apple cannot verify" error, go to "Settings → Privacy & Security → Security" and select "Open Anyway"
+
+> Learn more about FAQs: [Frequently Asked Questions](/plugin_dev_en/0331-faq.en)
+
+### Reference Resources
+
+- [Official Documentation](https://docs.dify.ai/)
+- [Plugin Development SDK](https://github.com/langgenius/dify-plugin-sdks)
+- [Plugin Examples Repository](https://github.com/langgenius/dify-plugin-examples)
+- [Model Plugin Introduction](/plugin_dev_en/0131-model-plugin-introduction.en)
+- [Plugin Publishing Overview](/plugin_dev_en/0321-release-overview.en)
+- [Frequently Asked Questions](/plugin_dev_en/0331-faq.en)
+- [General Specifications](/plugin_dev_en/0411-general-specifications.en)
+- [Getting Started with Plugin Development](/plugin_dev_en/0111-getting-started-dify-plugin.en)

@@ -1,0 +1,82 @@
+---
+dimensions:
+  type:
+    primary: conceptual
+    detail: architecture
+  level: beginner
+standard_title: Model Plugin Introduction
+language: en
+title: Model Plugins
+summary: Introduces the basic concepts and structure of model plugins. Model plugins enable Dify to call various types of models from different providers (like OpenAI, Anthropic, Google, etc.), including Large Language Models (LLM), Text Embedding, Speech-to-Text, and other types.
+---
+
+Model plugins enable the Dify platform to call all LLMs under a specific model provider. For example, after installing the OpenAI model plugin, the Dify platform can call models provided by OpenAI such as `GPT-4`, `GPT-4o-2024-05-13`, etc.
+
+## Model Plugin Structure
+
+To facilitate understanding of the concepts involved in developing model plugins, here is a brief introduction to the structure within a model plugin:
+
+*   **Model Provider**: The company that develops the large models, such as **OpenAI, Anthropic, Google**, etc.
+*   **Model Category**: Depending on the model provider, there are categories such as Large Language Models (LLM), Text Embedding models, Speech-to-Text (Speech2text), etc.
+*   **Specific Model**: `claude-3-5-sonnet`, `gpt-4-turbo`, etc.
+
+The code hierarchy structure in the plugin project:
+
+```bash
+- Model Provider
+    - Model Category
+        - Specific Model
+```
+
+Taking **Anthropic** as an example, the sample structure of the model plugin is as follows:
+
+```bash
+- Anthropic
+    - llm
+        claude-3-5-sonnet-20240620
+        claude-3-haiku-20240307
+        claude-3-opus-20240229
+        claude-3-sonnet-20240229
+        claude-instant-1.2
+        claude-instant-1
+```
+
+Taking OpenAI as an example, because it supports multiple model types, there are multiple layers of model categories, and the structure is as follows:
+
+```bash
+├── models
+│   ├── llm
+│   │   ├── chatgpt-4o-latest
+│   │   ├── gpt-3.5-turbo
+│   │   ├── gpt-4-0125-preview
+│   │   ├── gpt-4-turbo
+│   │   ├── gpt-4o
+│   │   ├── llm
+│   │   ├── o1-preview
+│   │   └── text-davinci-003
+│   ├── moderation
+│   │   ├── moderation
+│   │   └── text-moderation-stable
+│   ├── speech2text
+│   │   ├── speech2text
+│   │   └── whisper-1
+│   ├── text_embedding
+│   │   ├── text-embedding-3-large
+│   │   └── text_embedding
+│   └── tts
+│       ├── tts-1-hd
+│       ├── tts-1
+│       └── tts
+```
+
+## Model Configuration
+
+Model plugins define the behavior and attributes of models through configuration files. For detailed model design rules and configuration formats, please refer to the [Model Designing Rules](/plugin_dev_en/0411-model-designing-rules.en) document and the [Model Schema](/plugin_dev_en/0412-model-schema.en) specification.
+
+## Further Reading
+
+-   [Quickly Integrate a New Model](/plugin_dev_en/0211-getting-started-new-model.en) - Learn how to add new models for already supported providers
+-   [Model Designing Rules](/plugin_dev_en/0411-model-designing-rules.en) - Understand the specifications for model configuration in detail
+-   [Model Schema](/plugin_dev_en/0412-model-schema.en) - Gain a deeper understanding of the model plugin architecture
+-   [Define Plugin Information via Manifest File](/plugin_dev_en/0411-plugin-info-by-manifest.en) - Learn how to define plugin metadata
+-   [Basic Concepts of Plugin Development](/plugin_dev_en/0111-getting-started-dify-plugin.en) - Return to the plugin development getting started guide

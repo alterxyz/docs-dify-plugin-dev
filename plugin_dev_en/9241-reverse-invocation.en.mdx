@@ -1,0 +1,29 @@
+---
+dimensions:
+    type:
+        primary: implementation
+        detail: advanced
+    level: beginner
+standard_title: Reverse Invocation
+language: en
+title: Reverse Invocation of Dify Services
+summary: This document briefly introduces the reverse invocation capability of Dify plugins, allowing plugins to call specified services within the Dify main platform. The document lists four types of modules that can be called: App (accessing App data), Model (utilizing platform model capabilities), Tool (calling other tool plugins within the platform), and Node (invoking nodes within Chatflow/Workflow applications).
+original_en: true
+---
+
+Plugins can request some of the services within the main Dify platform to enhance it's capabilities by reverse invocation.
+
+### Callable Dify Modules
+
+*   [**App**](/en/plugins/schema-definition/reverse-invocation-of-the-dify-service/app)
+
+    Plugins can access data from Apps within the Dify platform.
+*   [**Model**](/en/plugins/schema-definition/reverse-invocation-of-the-dify-service/model)
+
+    Plugins can make reverse calls to LLM capabilities within the Dify platform, including all model types and features available on the platform, such as TTS, Rerank, etc.
+*   [**Tool**](/en/plugins/schema-definition/reverse-invocation-of-the-dify-service/tool)
+
+    Plugins can request other tool-type plugins within the Dify platform.
+*   [**Node**](/en/plugins/schema-definition/reverse-invocation-of-the-dify-service/node)
+
+    Plugins can request nodes within specific Chatflow/Workflow applications on the Dify platform.

@@ -1,0 +1,101 @@
+---
+dimensions:
+  type:
+    primary: operational
+    detail: deployment
+  level: intermediate
+standard_title: Release to Dify Marketplace
+language: en
+title: Publishing to Dify Marketplace
+summary: This guide details the complete process for publishing plugins to the Dify Marketplace, including key steps and considerations such as submitting PRs, the review process, and post-release maintenance.
+---
+
+Dify Marketplace welcomes plugin listing applications from partners and community developers. Your contributions will further enrich the possibilities of Dify plugins. This guide provides a clear release process and best practice recommendations to ensure your plugin can be successfully published and bring value to the community. If you haven't developed a plugin yet, you can refer to the [Plugin Development Getting Started Guide](/plugin_dev_en/0211-getting-started-dify-tool.en).
+
+Please follow the steps below to submit your plugin Pull Request (PR) to the [GitHub code repository](https://github.com/langgenius/dify-plugins) and undergo review. Once approved, the plugin will be officially listed on the Dify Marketplace.
+
+### Plugin Release Process
+
+Publishing a plugin to the Dify Marketplace involves the following steps:
+
+1.  Complete the development and testing of the plugin according to the [Plugin Developer Guidelines](/plugin_dev_en/0312-contributor-covenant-code-of-conduct.en);
+2.  Write the plugin's privacy policy according to the [Plugin Privacy Data Protection Guidelines](/plugin_dev_en/0312-privacy-protection-guidelines.en), and write the file path or URL of this privacy policy into the plugin's [manifest file](/plugin_dev_en/0411-plugin-info-by-manifest.en);
+3.  Complete plugin packaging;
+4.  Fork the [Dify Plugins](https://github.com/langgenius/dify-plugins) code repository;
+5.  Create an Organization directory (usually your GitHub username or organization name), create a directory named after your plugin under the Organization directory, and upload the plugin's code and `.pkg` file to the corresponding plugin name directory;
+6.  Follow the content format of the PR Template in GitHub to submit a Pull Request (PR) and wait for review;
+7.  After approval, the plugin code will be merged into the Main branch, and the plugin will be automatically listed on the [Dify Marketplace](https://marketplace.dify.ai/).
+
+Plugin submission, review, and listing process diagram:
+
+![The process of uploading plugins](https://assets-docs.dify.ai/2025/01/05df333acfaf662e99316432db23ba9f.png)
+
+> **Note**: The Contributor Agreement in the diagram above refers to the [Plugin Developer Guidelines](/plugin_dev_en/0312-contributor-covenant-code-of-conduct.en).
+
+***
+
+### During Pull Request (PR) Review
+
+Actively respond to questions and feedback from reviewers:
+
+*   PR comments unresolved within **14 days** will be marked as stale (can be reopened).
+*   PR comments unresolved within **30 days** will be closed (cannot be reopened; a new PR must be created).
+
+***
+
+### **After Pull Request (PR) Approval**
+
+**1. Continuous Maintenance**
+
+*   Address issues and feature requests reported by users.
+*   Migrate the plugin during significant API changes:
+    *   Dify will release change notifications and migration instructions in advance.
+    *   Dify engineers can provide migration support.
+
+**2. Limitations During Marketplace Public Beta Testing Phase**
+
+*   Avoid introducing breaking changes to existing plugins.
+
+***
+
+### Review Process
+
+**1. Review Order**
+
+*   PRs are processed in **first-come, first-served** order. Reviews will begin within 1 week. If there are delays, reviewers will notify the PR author via comments.
+
+**2. Review Focus**
+
+*   Check if the plugin name, description, and setup instructions are clear and instructive.
+*   Check if the plugin's [Manifest file](/plugin_dev_en/0411-plugin-info-by-manifest.en) conforms to format specifications and includes valid author contact information.
+
+3.  **Plugin Functionality and Relevance**
+
+*   Test the plugin according to the [Plugin Development Guide](/plugin_dev_en/0111-getting-started-dify-plugin.en).
+*   Ensure the plugin serves a reasonable purpose within the Dify ecosystem.
+
+[Dify.AI](https://dify.ai/) reserves the right to accept or reject plugin submissions.
+
+***
+
+### Frequently Asked Questions
+
+1.  **How to determine if a plugin is unique?**
+
+    Example: A Google Search plugin that only adds multilingual versions should be considered an optimization of an existing plugin. However, if the plugin implements significant functional improvements (such as optimizing batch processing or error handling), it can be submitted as a new plugin.
+
+2.  **What if my PR is marked as stale or closed?**
+
+    PRs marked as stale can be reopened after addressing the feedback. Closed PRs (over 30 days) require creating a new PR.
+
+3.  **Can plugins be updated during the Beta testing phase?**
+
+    Yes, but breaking changes should be avoided.
+
+## Related Resources
+
+-   [Publishing Plugins](/plugin_dev_en/0321-release-overview.en) - Understand various publishing methods
+-   [Plugin Developer Guidelines](/plugin_dev_en/0312-contributor-covenant-code-of-conduct.en) - Plugin submission specifications
+-   [Plugin Privacy Data Protection Guidelines](/plugin_dev_en/0312-privacy-protection-guidelines.en) - Privacy policy writing requirements
+-   [Packaging as a Local File and Sharing](/plugin_dev_en/0322-release-by-file.en) - Plugin packaging method
+-   [Define Plugin Information via Manifest File](/plugin_dev_en/0411-plugin-info-by-manifest.en) - Plugin metadata definition

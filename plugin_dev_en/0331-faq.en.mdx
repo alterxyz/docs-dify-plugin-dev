@@ -1,0 +1,37 @@
+---
+dimensions:
+  type:
+    primary: operational
+    detail: maintenance
+  level: beginner
+description: 'Author: Allen'
+todo: Developers (Developer / Contributor) should fully test before listing, debugging should not be the user's (Dify User / Consumer) responsibility.
+standard_title: Faq
+language: en
+title: Frequently Asked Questions
+summary: This document answers common questions during Dify plugin development and installation, including solutions for plugin upload failures (modifying the author field) and how to handle verification exceptions during plugin installation (setting the FORCE_VERIFYING_SIGNATURE environment variable).
+---
+
+## What to do if plugin installation fails with an upload error?
+
+**Error Details**: The error message `PluginDaemonBadRequestError: plugin_unique_identifier is not valid` appears.
+
+**Solution**: Modify the `author` field in the `manifest.yaml` file under the plugin project and the `.yaml` file under the `/provider` path to your GitHub ID.
+
+Rerun the plugin packaging command and install the new plugin package.
+
+## How to handle exceptions encountered during plugin installation?
+
+**Problem Description**: When installing a plugin, an exception message is encountered: `plugin verification has been enabled, and the plugin you want to install has a bad signature`. How should this be handled?
+
+**Solution**: Add the `FORCE_VERIFYING_SIGNATURE=false` field to the end of the `/docker/.env` configuration file, then run the following commands to restart the Dify service:
+
+```bash
+cd docker
+docker compose down
+docker compose up -d
+```
+
+After adding this field, the Dify platform will allow the installation of all plugins not listed (reviewed) on the Dify Marketplace, which may pose security risks.
+
+It is recommended to install plugins in a test / sandbox environment first, confirm their safety, and then install them in the production environment.

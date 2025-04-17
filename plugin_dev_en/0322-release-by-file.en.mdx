@@ -1,0 +1,64 @@
+---
+dimensions:
+  type:
+    primary: operational
+    detail: deployment
+  level: intermediate
+standard_title: Release by File
+language: en
+title: Packaging as a Local File and Sharing
+summary: This document details the steps for packaging a Dify plugin project into a local file and sharing it with others. It covers preparations before packaging, using the Dify plugin development tool to execute the packaging command, how to install the generated .difypkg file, and how to share the plugin file with other users.
+---
+
+After completing plugin development, you can package the plugin project into a local file and share it with others. The plugin can then be installed into a Dify Workspace using the file. If you haven't developed a plugin yet, you can refer to the [Plugin Development Getting Started Guide](/plugin_dev_en/0211-getting-started-dify-tool.en).
+
+*   **Features**:
+    *   Does not rely on online platforms, allowing for **quick and flexible** plugin sharing.
+    *   Suitable for **private plugins** or **internal testing**.
+*   **Release Process**:
+    *   Package the plugin project into a local file.
+    *   Upload the file on the Dify plugin page to install the plugin.
+
+This article will introduce how to package a plugin project into a local file and how to install a plugin using the local file.
+
+### Prerequisites
+
+*   **Dify Plugin Development Tool**, for detailed instructions, please refer to [Initialize Development Tools](/plugin_dev_en/0221-initialize-development-tools.en).
+
+After configuration, enter the `dify version` command in the terminal and check if version information is output to confirm that the necessary development tools are installed.
+
+### Package Plugin
+
+> Before packaging the plugin, ensure that the `author` field in the plugin's `manifest.yaml` file and the `.yaml` file under the `/provider` path matches your GitHub ID. For detailed information about the manifest file, please refer to [Define Plugin Information via Manifest File](/plugin_dev_en/0411-plugin-info-by-manifest.en).
+
+After the plugin project development is complete, please ensure you have finished [remote debugging testing](/plugin_dev_en/0411-remote-debug-a-plugin.en). Go to the parent directory of the plugin project and run the following plugin packaging command:
+
+```bash
+# Replace ./your_plugin_project with the actual path to your plugin project directory
+dify plugin package ./your_plugin_project
+```
+
+After running the command, a file ending with the `.difypkg` suffix will be generated in the current path.
+
+![Generated Plugin File](https://assets-docs.dify.ai/2024/12/98e09c04273eace8fe6e5ac976443cca.png)
+
+### Install Plugin
+
+Visit the Dify plugin management page, click **Install Plugin** in the upper right corner → **From Local File**, or drag and drop the plugin file onto the blank area of the page to install the plugin.
+
+![Install Plugin File](https://assets-docs.dify.ai/2024/12/8c31c4025a070f23455799f942b91a57.png)
+
+### Publish Plugin
+
+You can share the plugin file with others or upload it to the internet for others to download. If you wish to share your plugin more broadly, consider:
+
+1.  [Publishing to an Individual GitHub Repository](/plugin_dev_en/0322-release-to-individual-github-repo.en) - Share plugins via GitHub
+2.  [Publishing to Dify Marketplace](/plugin_dev_en/0322-release-to-dify-marketplace.en) - Publish plugins on the official market
+
+## Related Resources
+
+-   [Publishing Plugins](/plugin_dev_en/0321-release-overview.en) - Understand various publishing methods
+-   [Initialize Development Tools](/plugin_dev_en/0221-initialize-development-tools.en) - Configure the plugin development environment
+-   [Remote Debugging a Plugin](/plugin_dev_en/0411-remote-debug-a-plugin.en) - Learn plugin debugging methods
+-   [Define Plugin Information via Manifest File](/plugin_dev_en/0411-plugin-info-by-manifest.en) - Define plugin metadata
+-   [Plugin Development Getting Started Guide](/plugin_dev_en/0211-getting-started-dify-tool.en) - Start developing plugins from scratch

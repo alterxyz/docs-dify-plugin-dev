@@ -1,0 +1,84 @@
+---
+dimensions:
+  type:
+    primary: operational
+    detail: deployment
+  level: beginner
+standard_title: Release Overview
+language: en
+title: Publishing Plugins
+summary: This document introduces the three publishing methods for Dify plugins: the official Marketplace, open-source GitHub repositories, and local plugin file packages. It details the characteristics, release process, and applicable scenarios for each method, and provides specific publishing recommendations to meet different developer needs.
+---
+
+### Publishing Methods
+
+To meet the diverse publishing needs of developers, Dify offers the following three plugin publishing methods. Before publishing, please ensure you have completed the development and testing of your plugin, and have read the [Basic Concepts of Plugin Development](/plugin_dev_en/0111-getting-started-dify-plugin.en) and [Plugin Developer Guidelines](/plugin_dev_en/0312-contributor-covenant-code-of-conduct.en).
+
+#### **1. Marketplace**
+
+**Introduction**: The official plugin market provided by Dify, where users can browse, search, and install various plugins with one click.
+
+**Features**:
+
+*   Plugins are listed after review, ensuring **safety and reliability**.
+*   Can be directly installed into personal or team **Workspaces**.
+
+**Release Process**:
+
+*   Submit the plugin project to the **Dify Marketplace** [code repository](https://github.com/langgenius/dify-plugins).
+*   After official review, the plugin will be publicly released in the market for other users to install and use.
+
+For detailed instructions, please refer to:
+
+[Publishing to Dify Marketplace](/plugin_dev_en/0322-release-to-dify-marketplace.en)
+
+#### 2. **GitHub Repository**
+
+**Introduction**: Open-source or host the plugin on **GitHub**, making it easy for others to view, download, and install.
+
+**Features**:
+
+*   Convenient for **version management** and **open-source sharing**.
+*   Users can install directly via the plugin link without platform review.
+
+**Release Process**:
+
+*   Push the plugin code to a GitHub repository.
+*   Share the repository link; users can integrate the plugin into their **Dify Workspace** via the link.
+
+For detailed instructions, please refer to:
+
+[Publishing to an Individual GitHub Repository](/plugin_dev_en/0322-release-to-individual-github-repo.en)
+
+#### 3. Plugin File Package (Local Installation)
+
+**Introduction**: Package the plugin into a local file (e.g., `.difypkg` format) for installation by others through file sharing.
+
+**Features**:
+
+*   Does not rely on online platforms, allowing for **quick and flexible** plugin sharing.
+*   Suitable for **private plugins** or **internal testing**.
+
+**Release Process**:
+
+*   Package the plugin project into a local file.
+*   On the Dify plugin page, click **Upload Plugin** and select the local file to install the plugin.
+
+You can package the plugin project into a local file and share it with others. After uploading the file on the plugin page, the plugin can be installed into the Dify Workspace.
+
+For detailed instructions, please refer to:
+
+[Packaging as a Local File and Sharing](/plugin_dev_en/0322-release-by-file.en)
+
+### **Publishing Recommendations**
+
+*   **Want to promote your plugin?** → **Recommend using the Marketplace**. Ensure plugin quality through official review and increase visibility.
+*   **Open-source sharing project?** → **Recommend using GitHub**. Convenient for version management and community collaboration.
+*   **Quick distribution or internal testing?** → **Recommend using plugin files**. Simple and efficient installation and sharing.
+
+## Related Resources
+
+-   [Basic Concepts of Plugin Development](/plugin_dev_en/0111-getting-started-dify-plugin.en) - Comprehensive understanding of Dify plugin development
+-   [Plugin Developer Guidelines](/plugin_dev_en/0312-contributor-covenant-code-of-conduct.en) - Understand plugin submission specifications
+-   [Plugin Privacy Data Protection Guidelines](/plugin_dev_en/0312-privacy-protection-guidelines.en) - Understand privacy policy writing requirements
+-   [Define Plugin Information via Manifest File](/plugin_dev_en/0411-plugin-info-by-manifest.en) - Understand the configuration of plugin manifest files

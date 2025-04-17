@@ -1,0 +1,90 @@
+---
+dimensions:
+  type:
+    primary: operational
+    detail: setup
+  level: intermediate
+standard_title: Privacy Protection Guidelines
+language: en
+title: Plugin Privacy Policy Guidelines
+summary: This document describes the guidelines for developers on how to write a privacy policy when submitting plugins to the Dify Marketplace. It covers how to confirm and list the types of personal data collected (directly identifying information, indirectly identifying information, combined information), how to fill out the plugin privacy policy, how to introduce the privacy policy declaration in the Manifest file, and answers to related frequently asked questions.
+---
+
+When submitting a plugin listing application to the Dify Marketplace, you need to publicly state how you handle user data. Below are guidelines for filling out plugin-related privacy questions and user data handling. If you haven't developed a plugin yet, you can refer to the [Plugin Development Getting Started Guide](/plugin_dev_en/0211-getting-started-dify-tool.en).
+
+The content of the plugin privacy policy declaration revolves around the following question:
+
+**Does your plugin collect and use user personal data?** If yes, please organize and list the specific types.
+
+> Personal data refers to any information that can identify a specific individual, including information that can be used alone or in combination with other information to identify, contact, or locate an individual.
+
+#### **1. List the Types of Data Collected**
+
+**Type 1: Directly Identifying Information**
+
+*   Name (full name, first name, last name)
+*   Email address
+*   Phone number
+*   Home address
+*   Identification number (ID card, passport, driver's license, etc.)
+
+**Type 2: Indirectly Identifying Information**
+
+*   Device identifiers (IMEI, MAC address, device ID)
+*   IP address
+*   Location information (GPS coordinates, city, region)
+*   Online identifiers (cookies, advertising IDs)
+*   Username
+*   Avatar/Profile picture
+*   Biometric data (fingerprints, facial recognition)
+*   Browsing history
+*   Purchase history
+*   Health data
+*   Financial information
+
+**Type 3: Combined Information Used to Identify Individuals**
+
+*   Age
+*   Gender
+*   Occupation
+*   Interests/Hobbies
+
+Even if your plugin itself does not collect personal information, please confirm whether third-party services used by the plugin involve data collection or processing. As a developer, you need to disclose all data collection activities, including data processing by third-party services. Be sure to read the privacy policies of third-party services and declare all data collection involved in the plugin upon submission.
+
+For example, if the plugin you are developing involves the Slack service, please reference [Slack's Privacy Policy](https://slack.com/trust/privacy/privacy-policy) in your plugin's privacy policy declaration file and state the data collection situation.
+
+#### 2. Fill in the Latest Version of the Plugin Privacy Policy
+
+The **Plugin Privacy Policy** must include:
+
+*   Types of data collected
+*   Purpose of data use
+*   Whether data is shared with third parties (if yes, list the names of the third-party services and links to their privacy policies)
+*   If you are unfamiliar with writing privacy policies, you can refer to the privacy policies within plugins officially maintained by Dify.
+
+#### **3. Introduce the Privacy Policy Declaration in the Plugin Manifest File**
+
+For detailed instructions on filling in the fields, please refer to [Define Plugin Information via Manifest File](/plugin_dev_en/0411-plugin-info-by-manifest.en).
+
+### **Frequently Asked Questions**
+
+1.  **What does "collect and use" user personal data mean? What are some common examples?**
+
+    "Collect and use" refers to the collection, transmission, use, or sharing of user data. Common situations include:
+
+    *   Collecting personal information through forms;
+    *   Using login functions (including third-party authentication);
+    *   Collecting input or resources that may contain personal information;
+    *   Analyzing user behavior, interactions, and usage;
+    *   Storing communication content, such as messages, chat logs, emails;
+    *   Accessing user profiles from linked social media;
+    *   Collecting health data, such as exercise, heart rate, medical information;
+    *   Saving search history or browsing behavior;
+    *   Processing financial information, such as bank details, credit scores, transaction records.
+
+## Related Resources
+
+-   [Publishing Plugins](/plugin_dev_en/0321-release-overview.en) - Understand the plugin release process
+-   [Publishing to Dify Marketplace](/plugin_dev_en/0322-release-to-dify-marketplace.en) - Learn how to submit plugins to the official marketplace
+-   [Plugin Developer Guidelines](/plugin_dev_en/0312-contributor-covenant-code-of-conduct.en) - Understand plugin submission specifications
+-   [Define Plugin Information via Manifest File](/plugin_dev_en/0411-plugin-info-by-manifest.en) - Plugin metadata configuration

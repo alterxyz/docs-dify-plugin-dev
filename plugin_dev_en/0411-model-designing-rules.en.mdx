@@ -1,0 +1,213 @@
+---
+dimensions:
+  type:
+    primary: reference
+    detail: core
+  level: beginner
+standard_title: Model Designing Rules
+language: en
+title: Model Design Rules
+summary: This document defines the core concepts and structures for Dify model plugin development in detail, including Model Provider (Provider), AI Model Entity (AIModelEntity), Model Type (ModelType), Configuration Method (ConfigurateMethod), Model Feature (ModelFeature), Parameter Rule (ParameterRule), Price Configuration (PriceConfig), and detailed data structure specifications for various credential modes.
+---
+
+*   Model provider rules are based on the [Provider](#provider) entity.
+*   Model rules are based on the [AIModelEntity](#aimodelentity) entity.
+
+> All entities below are based on `Pydantic BaseModel` and can be found in the `entities` module.
+
+### Provider
+
+*   `provider` (string) Provider identifier, e.g., `openai`
+*   `label` (object) Provider display name, i18n, supports `en_US` (English) and `zh_Hans` (Chinese)
+    *   `zh_Hans` (string) \[optional] Chinese label name. If `zh_Hans` is not set, `en_US` will be used by default.
+    *   `en_US` (string) English label name
+*   `description` (object) \[optional] Provider description, i18n
+    *   `zh_Hans` (string) \[optional] Chinese description
+    *   `en_US` (string) English description
+*   `icon_small` (string) \[optional] Provider small ICON, stored in the `_assets` directory under the corresponding provider implementation directory, i18n strategy same as `label`
+    *   `zh_Hans` (string) \[optional] Chinese ICON
+    *   `en_US` (string) English ICON
+*   `icon_large` (string) \[optional] Provider large ICON, stored in the `_assets` directory under the corresponding provider implementation directory, i18n strategy same as `label`
+    *   `zh_Hans` (string) \[optional] Chinese ICON
+    *   `en_US` (string) English ICON
+*   `background` (string) \[optional] Background color value, e.g., #FFFFFF. If empty, the frontend default color value will be displayed.
+*   `help` (object) \[optional] Help information
+    *   `title` (object) Help title, i18n
+        *   `zh_Hans` (string) \[optional] Chinese title
+        *   `en_US` (string) English title
+    *   `url` (object) Help link, i18n
+        *   `zh_Hans` (string) \[optional] Chinese link
+        *   `en_US` (string) English link
+*   `supported_model_types` (array\[[ModelType](#modeltype)]) Supported model types
+*   `configurate_methods` (array\[[ConfigurateMethod](#configuratemethod)]) Configuration methods
+*   `provider_credential_schema` (\[[ProviderCredentialSchema](#providercredentialschema)]) Provider credential specification
+*   `model_credential_schema` (\[[ModelCredentialSchema](#modelcredentialschema)]) Model credential specification
+
+### AIModelEntity
+
+*   `model` (string) Model identifier, e.g., `gpt-3.5-turbo`
+*   `label` (object) \[optional] Model display name, i18n, supports `en_US` (English) and `zh_Hans` (Chinese)
+    *   `zh_Hans` (string) \[optional] Chinese label name
+    *   `en_US` (string) English label name
+*   `model_type` ([ModelType](#modeltype)) Model type
+*   `features` (array\[[ModelFeature](#modelfeature)]) \[optional] List of supported features
+*   `model_properties` (object) Model properties
+    *   `mode` ([LLMMode](#llmmode)) Mode (available for model type `llm`)
+    *   `context_size` (int) Context size (available for model types `llm`, `text-embedding`)
+    *   `max_chunks` (int) Maximum number of chunks (available for model types `text-embedding`, `moderation`)
+    *   `file_upload_limit` (int) Maximum file upload limit in MB. (available for model type `speech2text`)
+    *   `supported_file_extensions` (string) Supported file extension formats, e.g., mp3, mp4 (available for model type `speech2text`)
+    *   `default_voice` (string) Default voice, required: alloy, echo, fable, onyx, nova, shimmer (available for model type `tts`)
+    *   `voices` (list) List of available voices.
+        *   `mode` (string) Voice model. (available for model type `tts`)
+        *   `name` (string) Voice model display name. (available for model type `tts`)
+        *   `language` (string) Language supported by the voice model. (available for model type `tts`)
+    *   `word_limit` (int) Word limit for a single conversion, defaults to segmentation by paragraph (available for model type `tts`)
+    *   `audio_type` (string) Supported audio file extension formats, e.g., mp3, wav (available for model type `tts`)
+    *   `max_workers` (int) Number of concurrent text-to-audio conversion tasks supported (available for model type `tts`)
+    *   `max_characters_per_chunk` (int) Maximum characters per chunk (available for model type `moderation`)
+*   `parameter_rules` (array\[[ParameterRule](#parameterrule)]) \[optional] Model invocation parameter rules
+*   `pricing` (\[[PriceConfig](#priceconfig)]) \[optional] Pricing information
+*   `deprecated` (bool) Whether it is deprecated. If deprecated, the model will no longer be displayed in the model list, but already configured ones can continue to be used. Default is False.
+
+### ModelType
+
+*   `llm` Text generation model
+*   `text-embedding` Text Embedding model
+*   `rerank` Rerank model
+*   `speech2text` Speech-to-text
+*   `tts` Text-to-speech
+*   `moderation` Moderation
+
+### ConfigurateMethod
+
+*   `predefined-model` Predefined model
+
+    Indicates that users only need to configure unified provider credentials to use the predefined models under the provider.
+
+*   `customizable-model` Customizable model
+
+    Users need to add credential configurations for each model.
+
+*   `fetch-from-remote` Fetch from remote
+
+    Consistent with the `predefined-model` configuration method, only unified provider credentials need to be configured. Models are fetched from the provider using the credential information.
+
+### ModelFeature
+
+*   `agent-thought` Agent reasoning, generally models over 70B have chain-of-thought capabilities.
+*   `vision` Vision, i.e., image understanding.
+*   `tool-call` Tool calling
+*   `multi-tool-call` Multi-tool calling
+*   `stream-tool-call` Streaming tool calling
+
+### FetchFrom
+
+*   `predefined-model` Predefined model
+*   `fetch-from-remote` Remote model
+
+### LLMMode
+
+*   `completion` Text completion
+*   `chat` Chat
+
+### ParameterRule
+
+*   `name` (string) Actual parameter name for model invocation
+*   `use_template` (string) \[optional] Use template
+
+> For specific usage of templates, refer to the examples in [Creating a New Model Provider](/plugin_dev_en/0222-creating-new-model-provider.en).
+
+Five default variable content configuration templates are pre-set:
+
+*   `temperature`
+*   `top_p`
+*   `frequency_penalty`
+*   `presence_penalty`
+*   `max_tokens`
+
+You can directly set the template variable name in `use_template`. This will use the default configuration from `entities.defaults.PARAMETER_RULE_TEMPLATE`, and you do not need to set any parameters other than `name` and `use_template`. If additional configuration parameters are set, they will override the default configuration. Refer to `openai/llm/gpt-3.5-turbo.yaml`.
+
+*   `label` (object) \[optional] Label, i18n
+    *   `zh_Hans`(string) \[optional] Chinese label name
+    *   `en_US` (string) English label name
+*   `type`(string) \[optional] Parameter type
+    *   `int` Integer
+    *   `float` Floating point number
+    *   `string` String
+    *   `boolean` Boolean
+*   `help` (string) \[optional] Help information
+    *   `zh_Hans` (string) \[optional] Chinese help information
+    *   `en_US` (string) English help information
+*   `required` (bool) Whether it is required, default False.
+*   `default`(int/float/string/bool) \[optional] Default value
+*   `min`(int/float) \[optional] Minimum value, applicable only to numeric types
+*   `max`(int/float) \[optional] Maximum value, applicable only to numeric types
+*   `precision`(int) \[optional] Precision, number of decimal places to retain, applicable only to numeric types
+*   `options` (array\[string]) \[optional] Dropdown option values, applicable only when `type` is `string`. If not set or null, option values are not restricted.
+
+### PriceConfig
+
+*   `input` (float) Input unit price, i.e., Prompt unit price
+*   `output` (float) Output unit price, i.e., returned content unit price
+*   `unit` (float) Price unit. For example, if priced per 1M tokens, the unit token count corresponding to the unit price is `0.000001`
+*   `currency` (string) Currency unit
+
+### ProviderCredentialSchema
+
+*   `credential_form_schemas` (array\[[CredentialFormSchema](#credentialformschema)]) Credential form specification
+
+### ModelCredentialSchema
+
+*   `model` (object) Model identifier, variable name defaults to `model`
+    *   `label` (object) Model form item display name
+        *   `en_US` (string) English
+        *   `zh_Hans`(string) \[optional] Chinese
+    *   `placeholder` (object) Model prompt content
+        *   `en_US`(string) English
+        *   `zh_Hans`(string) \[optional] Chinese
+*   `credential_form_schemas` (array\[[CredentialFormSchema](#credentialformschema)]) Credential form specification
+
+### CredentialFormSchema
+
+*   `variable` (string) Form item variable name
+*   `label` (object) Form item label name
+    *   `en_US`(string) English
+    *   `zh_Hans` (string) \[optional] Chinese
+*   `type` ([FormType](#formtype)) Form item type
+*   `required` (bool) Whether it is required
+*   `default`(string) Default value
+*   `options` (array\[[FormOption](#formoption)]) Exclusive property for form items of type `select` or `radio`, defines dropdown content
+*   `placeholder`(object) Exclusive property for form items of type `text-input`, form item PlaceHolder
+    *   `en_US`(string) English
+    *   `zh_Hans` (string) \[optional] Chinese
+*   `max_length` (int) Exclusive property for form items of type `text-input`, defines maximum input length, 0 means no limit.
+*   `show_on` (array\[[FormShowOnObject](#formshowonobject)]) Display when the value of another form item meets the condition. If empty, always display.
+
+#### FormType
+
+*   `text-input` Text input component
+*   `secret-input` Password input component
+*   `select` Single-select dropdown
+*   `radio` Radio component
+*   `switch` Switch component, only supports `true` and `false`
+
+#### FormOption
+
+*   `label` (object) Label
+    *   `en_US`(string) English
+    *   `zh_Hans`(string) \[optional] Chinese
+*   `value` (string) Dropdown option value
+*   `show_on` (array\[[FormShowOnObject](#formshowonobject)]) Display when the value of another form item meets the condition. If empty, always display.
+
+#### FormShowOnObject
+
+*   `variable` (string) Variable name of another form item
+*   `value` (string) Variable value of another form item
+
+## Related Resources
+
+-   [Model Architecture Explained](/plugin_dev_en/0412-model-schema.en) - In-depth understanding of the model plugin architecture specification
+-   [Quickly Integrate a New Model](/plugin_dev_en/0211-getting-started-new-model.en) - Learn how to apply these rules to add new models
+-   [Define Plugin Information via Manifest File](/plugin_dev_en/0411-plugin-info-by-manifest.en) - Understand the configuration of the plugin manifest file
+-   [Creating a New Model Provider](/plugin_dev_en/0222-creating-new-model-provider.en) - Develop a brand new model provider plugin

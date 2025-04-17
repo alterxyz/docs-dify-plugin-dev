@@ -1,0 +1,62 @@
+---
+dimensions:
+  type:
+    primary: operational
+    detail: setup
+  level: intermediate
+standard_title: Contributor Covenant Code of Conduct
+language: en
+title: Plugin Developer Guidelines
+summary: This document provides guidelines for Dify plugin developers to follow before submitting a Pull Request, including ensuring plugin functionality, complete documentation, providing unique value, and complying with data privacy and security specifications. It includes requirements for documentation, guidance on avoiding duplicate plugins, and requirements for privacy information collection declarations.
+---
+
+### Before Submitting a Pull Request (PR)
+
+1.  **Ensure Plugin Functions Correctly and Documentation is Complete**
+
+*   Verify that the plugin's functionality works as expected. For details, refer to [Remote Debugging a Plugin](/plugin_dev_en/0411-remote-debug-a-plugin.en).
+*   Provide a comprehensive **README file**, including:
+    *   Setup instructions and usage guide.
+    *   Code, APIs, credentials, or other information required by plugin users to connect the plugin to the service.
+*   Ensure that collected user information is used solely for connecting to the service and improving plugin functionality.
+*   Prepare privacy policy content file or online document URL according to the [Plugin Privacy Data Protection Guidelines](/plugin_dev_en/0312-privacy-protection-guidelines.en).
+
+2.  **Verify the Contribution Value of the Plugin**
+
+*   Ensure the plugin provides unique value to Dify users.
+*   The plugin should introduce functionality or services not yet available in Dify or other plugins.
+*   Adhere to community standards:
+    *   Content must be non-violent and respectful of the global user community.
+    *   Comply with the relevant policies of the integrated service.
+*   **How to check if a similar plugin already exists?**
+    *   Avoid submitting functionality that duplicates existing plugins or PRs, unless the new plugin has the following characteristics:
+        *   Introduces new features.
+        *   Provides performance improvements.
+    *   **How to determine if a plugin is sufficiently unique:**
+        *   If the plugin only makes minor adjustments to existing functionality (e.g., adding a language parameter), it is recommended to extend the existing plugin directly.
+        *   If the plugin implements significant functional changes (e.g., optimizing batch processing or improving error handling), it can be submitted as a new plugin.
+    *   Unsure? Please include a brief explanation in your PR submission explaining why a new plugin is necessary.
+
+**Example:** Take the Google Search plugin as an example. It accepts a single input query and uses the Google Search API to output a list of Google search results. If you provide a new Google Search plugin with a similar underlying implementation but make minor adjustments to the input (e.g., adding a new language parameter), we recommend extending the existing plugin. On the other hand, if you implement optimized batch search and error handling capabilities in a new way, it can be reviewed as a separate plugin.
+
+3.  **Ensure the Plugin Complies with the Following Privacy Data Specifications**
+
+### Information Disclosure Requirements:
+
+*   Developers are **required** to declare whether they collect any type of user personal data when submitting an application/tool. For details, refer to [Plugin Privacy Data Protection Guidelines](/plugin_dev_en/0312-privacy-protection-guidelines.en).
+*   If data is collected, **briefly list** the types of data collected (e.g., username, email, device ID, location information, etc.), **without excessive detail**.
+*   Developers **must** provide a link to their privacy policy. The privacy policy only needs to state what information is collected, how it is used, what information will be disclosed to third parties, and links to relevant third-party privacy policies.
+
+**Review Focus:**
+
+*   **Formal Review:** Check if data collection status is declared as required.
+*   **High-Risk Data Screening:** Focus on whether sensitive data is collected (e.g., health information, financial information, children's personal information, etc.). If sensitive data is collected, **additional review** of its purpose and security measures is required.
+*   **Malicious Behavior Screening:** Check for obvious malicious behavior, such as collecting data without user consent, uploading user data to unknown servers, etc.
+
+## Related Resources
+
+-   [Basic Concepts of Plugin Development](/plugin_dev_en/0111-getting-started-dify-plugin.en) - Understand the basics of plugin development
+-   [Publishing Plugins](/plugin_dev_en/0321-release-overview.en) - Overview of the plugin release process
+-   [Plugin Privacy Data Protection Guidelines](/plugin_dev_en/0312-privacy-protection-guidelines.en) - Guide to writing privacy policies
+-   [Publishing to Dify Marketplace](/plugin_dev_en/0322-release-to-dify-marketplace.en) - Publishing plugins on the official marketplace
+-   [Remote Debugging a Plugin](/plugin_dev_en/0411-remote-debug-a-plugin.en) - Plugin debugging guide

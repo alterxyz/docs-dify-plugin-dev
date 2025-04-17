@@ -1,0 +1,66 @@
+---
+dimensions:
+  type:
+    primary: implementation
+    detail: standard
+  level: beginner
+standard_title: Initialize Development Tools
+language: en
+title: Initialize Development Tools
+summary: This document details the necessary preparations before Dify plugin development, including the complete steps for installing the Dify plugin scaffolding tool (dify-plugin-daemon) and configuring the Python environment (version requirement ≥3.12). It also provides reference links for developing different types of plugins.
+---
+
+Developing Dify plugins requires the following preparations. This document is the first step to start [Plugin Development](/plugin_dev_en/0111-getting-started-dify-plugin.en).
+
+*   Dify plugin scaffolding tool
+*   Python environment, version ≥ 3.12
+
+> The Dify plugin development scaffolding tool is also known as `dify-plugin-daemon` and can be considered the **Plugin Development SDK**.
+
+### **1. Install the Dify Plugin Development Scaffolding Tool**
+
+Visit the [Dify Plugin CLI](https://github.com/langgenius/dify-plugin-daemon/releases) project address, download and install the tool for the latest version number and corresponding operating system.
+
+This article uses **macOS with an M-series chip** as an example. After downloading the `dify-plugin-darwin-arm64` file, grant it execution permissions.
+
+```bash
+chmod +x dify-plugin-darwin-arm64
+```
+
+Run the following command to check if the installation was successful.
+
+```bash
+./dify-plugin-darwin-arm64 version
+```
+
+> If you encounter an "Apple cannot check it for malicious software" error, go to **"System Settings → Privacy & Security → Security"** and click the "Open Anyway" button.
+
+If the terminal returns version information similar to `v0.0.1-beta.15` after running the command, the installation was successful.
+
+> **💡 Tip:**
+>
+> If you want to use the `dify` command globally in your system to run the scaffolding tool, it is recommended to rename the binary file to `dify` and copy it to the `/usr/local/bin` system path.
+>
+> After configuration, entering the `dify version` command in the terminal will output the version information.
+>
+> <img src="https://assets-docs.dify.ai/2025/02/74e57a57c1ae1cc70f4a45084cbbb37e.png" alt="dify version command output" />
+
+### **2. Initialize Python Environment**
+
+For detailed instructions, please refer to the [Python Installation Tutorial](https://www.python.org/downloads/) or ask an LLM how to install a Python environment with version ≥ 3.12.
+
+### 3. Develop Plugins
+
+Please refer to the following content for examples of developing different types of plugins:
+
+-   [Tool Plugin Development Guide](/plugin_dev_en/0211-getting-started-dify-tool.en) - Hello World Getting Started Tutorial
+-   [Model Plugin Development Guide](/plugin_dev_en/0211-getting-started-new-model.en) - Quickly Integrate a New Model
+-   [Agent Strategy Plugin Development Guide](/plugin_dev_en/9433-agent-strategy-plugin.en) - Create Custom Reasoning Strategies
+-   [Extension Plugin Development Guide](/plugin_dev_en/9231-extension-plugin.en) - Implement External Service Integration via Webhooks
+-   [Plugin Packaging and Publishing](/plugin_dev_en/0321-release-overview.en) - Publish Your Plugin
+
+## Next Steps
+
+-   [Dify Plugin Development: Hello World Guide](/plugin_dev_en/0211-getting-started-dify-tool.en) - Start your first plugin development
+-   [Plugin Development Cheat Sheet](/plugin_dev_en/0131-cheatsheet.en) - Understand common commands and concepts
+-   [Define Plugin Information via Manifest File](/plugin_dev_en/0411-plugin-info-by-manifest.en) - Learn plugin metadata configuration
