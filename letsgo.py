@@ -8,7 +8,8 @@ DOCS_JSON_PATH = 'docs.json'
 DOCS_DIR = 'plugin_dev_zh'
 LANGUAGE_CODE = 'zh'
 FILE_EXTENSION = '.zh.mdx'
-FILENAME_PATTERN = re.compile(r'^(\d{4})-\[(.*?)\]\.zh\.mdx$')
+# 更新正则表达式以匹配 '0000-Title.zh.mdx' 格式
+FILENAME_PATTERN = re.compile(r'^(\d{4})-(.*?)\.zh\.mdx$')
 
 # --- PWX 到 Group 名称的映射 (新的两 Tab 结构) ---
 # (P, W, X) -> (tab_name, group_name, nested_group_name)
