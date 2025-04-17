@@ -42,7 +42,7 @@
                                         ]
                                     },
                                     {
-                                        "group": "标准开发流程",
+                                        "group": "开发 Dify 插件",
                                         "pages": [
                                             "plugin_dev_zh/0221-initialize-development-tools.zh",
                                             "plugin_dev_zh/0222-creating-new-model-provider-extra.zh",
@@ -63,7 +63,7 @@
                                         ]
                                     },
                                     {
-                                        "group": "发布插件",
+                                        "group": "发布与上架",
                                         "pages": [
                                             "plugin_dev_zh/0321-release-overview.zh",
                                             "plugin_dev_zh/0322-release-by-file.zh",
@@ -73,7 +73,9 @@
                                     },
                                     {
                                         "group": "常见问题解答",
-                                        "pages": ["plugin_dev_zh/0331-faq.zh"]
+                                        "pages": [
+                                            "plugin_dev_zh/0331-faq.zh"
+                                        ]
                                     }
                                 ]
                             },
@@ -90,19 +92,18 @@
                                 ]
                             },
                             {
-                                "group": "高级开发技巧",
+                                "group": "高级开发",
                                 "pages": [
                                     {
-                                        "group": "高级插件与 Agent",
+                                        "group": "Extension 与 Agent",
                                         "pages": [
-                                            "plugin_dev_zh/9223-tool.zh",
                                             "plugin_dev_zh/9231-extension-plugin.zh",
                                             "plugin_dev_zh/9232-agent.zh",
                                             "plugin_dev_zh/9433-agent-strategy-plugin.zh"
                                         ]
                                     },
                                     {
-                                        "group": "反向调用实现",
+                                        "group": "反向调用",
                                         "pages": [
                                             "plugin_dev_zh/9241-bundle.zh",
                                             "plugin_dev_zh/9241-reverse-invocation.zh",
@@ -135,6 +136,7 @@
                                     "plugin_dev_zh/0411-persistent-storage-kv.zh",
                                     "plugin_dev_zh/0411-plugin-info-by-manifest.zh",
                                     "plugin_dev_zh/0411-remote-debug-a-plugin.zh",
+                                    "plugin_dev_zh/0411-tool.zh",
                                     "plugin_dev_zh/0412-model-schema.zh"
                                 ]
                             }
@@ -180,6 +182,11 @@
         }
     },
     "contextual": {
-        "options": ["copy", "view", "chatgpt", "claude"]
+        "options": [
+            "copy",
+            "view",
+            "chatgpt",
+            "claude"
+        ]
     }
 }

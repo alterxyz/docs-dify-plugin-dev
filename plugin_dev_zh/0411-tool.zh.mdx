@@ -1,16 +1,16 @@
 ---
 dimensions:
   type:
-    primary: implementation
-    detail: standard
-  level: advanced
+    primary: reference
+    detail: core
+  level: beginner
 standard_title: Tool
 language: zh
-title: Tool
+title: Tool Return
 summary: 本文档详细介绍了Dify插件中Tool的数据结构和使用方法。内容包括如何返回不同类型的消息（图片URL、链接、文本、文件、JSON）、如何创建变量和流式变量消息以及如何定义工具的输出变量模式以便于在workflow中引用。
 ---
 
-在阅读详细的接口文档之前，请确保你已经阅读过[快速开始开发插件：工具](../quick-start/develop-plugins/tool-plugin.md)，并对 Dify 插件的工具接入流程已有大致了解。
+在阅读详细的接口文档之前，请确保你对 Dify 插件的工具接入流程已有大致了解。
 
 ### 数据结构
 
@@ -91,7 +91,7 @@ Dify 支持`文本` `链接` `图片` `文件BLOB` `JSON` 等多种消息类型�
     ) -> ToolInvokeMessage:
 ```
 
-#### 返回变量定义
+#### 返回自定义变量
 
 如果想要在 `workflow` 应用中引用 `tool` 的输出变量，则有必要提前定义有哪些变量可能被输出。Dify 插件支持使用 [`json_schema`](https://json-schema.org/)格式的输出变量定义，以下是一个简单的示例：
 
