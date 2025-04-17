@@ -73,9 +73,7 @@
                                     },
                                     {
                                         "group": "常见问题解答",
-                                        "pages": [
-                                            "plugin_dev_zh/0331-faq.zh"
-                                        ]
+                                        "pages": ["plugin_dev_zh/0331-faq.zh"]
                                     }
                                 ]
                             },
@@ -173,5 +171,15 @@
             "github": "https://github.com/langgenius/dify",
             "linkedin": "https://www.linkedin.com/company/langgenius"
         }
+    },
+    "seo": {
+        "metatags": {
+            "og:site_name": "Dify Plugin Development Docs",
+            "og:title": "Dify Plugin Development Docs | Concepts, Practices & Publishing",
+            "og:description": "Official Dify plugin developer documentation center. Learn how to build plugins like Models, Tools, Agent Strategies, extend Dify AI application capabilities, and publish them to the marketplace."
+        }
+    },
+    "contextual": {
+        "options": ["copy", "view", "chatgpt", "claude"]
     }
 }
