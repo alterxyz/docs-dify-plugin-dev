@@ -168,7 +168,8 @@
                                         "group": "快速开始",
                                         "pages": [
                                             "plugin_dev_zh/0211-getting-started-dify-tool.zh",
-                                            "plugin_dev_zh/0211-getting-started-new-model.zh"
+                                            "plugin_dev_zh/0211-getting-started-new-model.zh",
+                                            "plugin_dev_zh/0211-getting-started-by-prompt.zh"
                                         ]
                                     },
                                     {
